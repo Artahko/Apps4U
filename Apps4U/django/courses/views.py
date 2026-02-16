@@ -5,6 +5,6 @@ def course_list(request):
     courses = Course.objects.all()
     return render(request, 'courses/list.html', {'courses': courses})
 
-def course_detail(request, course_id):
-    course = get_object_or_404(Course, pk=course_id)
+def course_detail(request, course_slug):
+    course = get_object_or_404(Course, slug=course_slug)
     return render(request, 'courses/detail.html', {'course': course})
