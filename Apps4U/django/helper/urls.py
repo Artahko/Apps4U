@@ -6,6 +6,7 @@ app_name = "helper"
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("activities/", views.activities, name="activities"),
+    path("activities/", views.activities_list, name="activities"),
+    path("activities/<int:activity_id>/", views.activity_detail, name="activity_detail"),
 
 ]
