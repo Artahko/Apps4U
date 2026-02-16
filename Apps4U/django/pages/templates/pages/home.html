@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Portal | Home</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 40px; }
+        .hero { background: #f4f4f4; padding: 20px; border-radius: 8px; }
+        .btn { display: inline-block; background: #007bff; color: white;
+               padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>UCU Student Dashboard</h1>
+        <p>Welcome! Use this portal to track your Discrete Math assignments,
+           History seminars, and Object-Oriented Programming projects.</p>
+
+        <a href="{% url 'course_list' %}" class="btn">View My Courses</a>
+    </div>
+
+    <hr>
+
+    <h3>Quick Access</h3>
+    <ul>
+        <li><a href="{% url 'course_list' %}">Course Catalog</a></li>
+        <li><a href="{% url 'starter_pack' %}">Starter Pack</a></li>
+        <li><a href="/admin/">Admin Panel</a></li>
+    </ul>
+</body>
+</html>
