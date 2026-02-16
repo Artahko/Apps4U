@@ -12,3 +12,7 @@ def course_detail(request, course_slug):
 def course_faq(request, course_slug):
     course = get_object_or_404(Course, slug=course_slug)
     return render(request, 'courses/faq.html', {'course': course})
+
+def course_activities(request, course_slug):
+    course = get_object_or_404(Course, slug=course_slug)
+    return render(request, 'courses/activities.html', {'course': course})

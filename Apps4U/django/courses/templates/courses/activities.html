@@ -1,0 +1,12 @@
+<h1>Activities</h1>
+
+<ul>
+    {% for activity in activities %}
+        <li>
+            <a href="{% url 'course_activities' activity.id %}">
+                {{ activity.activity_text }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'course_detail' course.slug %}">← Back to Course</a>
