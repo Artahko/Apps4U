@@ -8,3 +8,15 @@ class Course(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+class FAQ(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='faqs')
+    question = models.CharField(max_length=200)
+    answear = models.TextField()
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return f"{self.question}"
