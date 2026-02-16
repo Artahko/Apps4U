@@ -1,0 +1,15 @@
+<h1>FAQs for {{ course.title }}</h1>
+
+<div class="faq-container">
+    {% for faq in course.faqs.all %}
+        <div class="faq-item">
+            <h3>{{ faq.question }}</h3>
+            <p>{{ faq.answer }}</p>
+        </div>
+        <hr>
+    {% empty %}
+        <p>No questions have been added for this course yet.</p>
+    {% endfor %}
+</div>
+
+<a href="{% url 'course_detail' course.slug %}">← Back to Course</a>
