@@ -1,0 +1,37 @@
+<h1>{{ activity.activity_text }}</h1>
+
+<p>{{ activity.description }}</p>
+
+<p>Published on: {{ activity.pub_date}}</p>
+
+<br/><br/>
+
+<h2>Comments</h2>
+
+{%if not activity.comments.all %}
+
+    No comments yet
+    <br/><br/>
+    <a href="{% url 'add_comment' course_slug=course.slug activity_id=activity.id %}">
+        Add one
+    </a>
+{%else%}
+
+    <a href="{% url 'add_comment' course_slug=course.slug activity_id=activity.id %}">Add comment</a>
+    <br/><br/>
+    {% for comment in activity.comments.all %}
+        <strong>
+            {{ comment.name }} -
+            {{ comment.date_added }}
+        </strong>
+        <br/>
+        {{ comment.body }}
+        <br/><br/>
+    {% endfor %}
+
+{%endif%}
+
+
+<br/><br/><br/>
+
+<a href="{% url 'course_activities' course.slug %}">Back to list</a>
