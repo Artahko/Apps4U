@@ -1,12 +1,35 @@
-<h1>Activities</h1>
+<h2>Activities for {{ course.title }}</h2>
 
 <ul>
-    {% for activity in activities %}
+    {% for activity in course.activity_set.all %}
         <li>
-            <a href="{% url 'course_activities' activity.id %}">
+            <a href="{% url 'activity_detail' course.slug activity.id %}">
                 {{ activity.activity_text }}
             </a>
         </li>
+    {% empty %}
+        <li>No activities yet.</li>
     {% endfor %}
 </ul>
+
+<br></br>
+
+<h2>Comments</h2>
+
+{%if not activity.comments.all %}
+    No comments yet <a href="#">
+        Add one
+    </a>
+{%else%}
+    {% for comment in activity.comments.all %}
+        <strong>
+            {{ comment.name }}
+            {{ comment.date_added }}
+        </strong>
+        {{ comment.body }}
+    {% endfor %}
+{%endif%}
+
+<br></br>
+
 <a href="{% url 'course_detail' course.slug %}">← Back to Course</a>

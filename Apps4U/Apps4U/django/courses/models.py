@@ -9,7 +9,9 @@ class Course(models.Model):
     def __str__(self):
         return f"{self.title}"
 
+
 class Activity(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     activity_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField("date published")
     description = models.TextField(blank=True)
@@ -17,10 +19,11 @@ class Activity(models.Model):
     def __str__(self):
         return self.activity_text
 
+
 class FAQ(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='faqs')
     question = models.CharField(max_length=200)
-    answear = models.TextField()
+    answer = models.TextField()
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -28,3 +31,13 @@ class FAQ(models.Model):
 
     def __str__(self):
         return f"{self.question}"
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Activity, on_delete=models.CASCADE, related_name="comments")
+    name = models.CharField(max_length=200)
+    body = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name}"
