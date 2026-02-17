@@ -22,9 +22,12 @@
 
     <h3>Quick Access</h3>
     <ul>
-        <li><a href="{% url 'course_list' %}">Course Catalog</a></li>
         <li><a href="{% url 'starter_pack' %}">Starter Pack</a></li>
-        <li><a href="/admin/">Admin Panel</a></li>
+        <li><a href="/admin/">Admin pannel</a></li>
     </ul>
+    <div class="user-controls">
+    <p>Logged in as: <strong>{{ user.username }}</strong></p>
+    <a href="{% url 'profile' %}">Look At My Account</a>
+    </div>
 </body>
 </html>
