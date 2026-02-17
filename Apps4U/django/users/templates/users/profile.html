@@ -1,0 +1,20 @@
+<div class="profile-container">
+    <h1>My Student Profile</h1>
+
+    <div class="profile-header">
+        <img src="{{ user.profile.icon.url }}" alt="Profile Picture" style="width:150px; border-radius:50%;">
+        <h2>{{ user.username }}</h2>
+    </div>
+
+    <div class="profile-info">
+        <p><strong>Major:</strong> {{ user.profile.get_major_display }}</p>
+        <p><strong>Course Year:</strong> {{ user.profile.get_year_of_study_display }}</p>
+
+        <h3>About Me</h3>
+        <p>{{ user.profile.about|linebreaks|default:"No bio added yet." }}</p>
+    </div>
+
+    <hr>
+
+<p><a href="{% url 'edit_profile' %}">Edit profile</a></p>
+<p><a href="{% url 'home' %}">Home page</a></p>

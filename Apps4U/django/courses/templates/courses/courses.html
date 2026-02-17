@@ -1,0 +1,10 @@
+<h2>Available Courses</h2>
+<ul>
+  {% for course in courses %}
+    <li>
+      <a href="{% url 'course_detail' course.slug %}">{{ course.title }}</a>
+    </li>
+  {% endfor %}
+</ul>
+<hr>
+<p><a href="{% url 'home' %}">Home page</a></p>
