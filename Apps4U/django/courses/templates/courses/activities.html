@@ -12,4 +12,24 @@
     {% endfor %}
 </ul>
 
+<br></br>
+
+<h2>Comments</h2>
+
+{%if not activity.comments.all %}
+    No comments yet <a href="#">
+        Add one
+    </a>
+{%else%}
+    {% for comment in activity.comments.all %}
+        <strong>
+            {{ comment.name }}
+            {{ comment.date_added }}
+        </strong>
+        {{ comment.body }}
+    {% endfor %}
+{%endif%}
+
+<br></br>
+
 <a href="{% url 'course_detail' course.slug %}">← Back to Course</a>
