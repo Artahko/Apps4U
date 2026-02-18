@@ -1,33 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html lang="uk">
 <head>
-    <title>Student Portal | Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apps4U - Russo One Logo</title>
+        
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        body { font-family: sans-serif; line-height: 1.6; padding: 40px; }
-        .hero { background: #f4f4f4; padding: 20px; border-radius: 8px; }
-        .btn { display: inline-block; background: #007bff; color: white;
-               padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        body { font-family: 'SN Pro', sans-serif; }
+        .font-logo {font-family: 'Russo One', sans-serif;}
     </style>
 </head>
-<body>
-    <div class="hero">
-        <h1>UCU Student Dashboard</h1>
-        <p>Welcome! Use this portal to track your Discrete Math assignments,
-           History seminars, and Object-Oriented Programming projects.</p>
+<body class="min-h-screen flex flex-col bg-white">
 
-        <a href="{% url 'course_list' %}" class="btn">View My Courses</a>
-    </div>
+    <header class="bg-[#6B5B95] text-white py-4 px-6 md:px-12 flex items-center justify-between">
+        <div class="text-3xl tracking-wide font-logo">Apps4U</div>
+        
+        <nav class="hidden md:flex items-center space-x-2">
+            <a href="#" class="bg-white text-[#6B5B95] px-4 py-1.5 rounded-md text-sm font-medium transition hover:bg-gray-100">Головна</a>
+            <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Стартерпак</a>
+            <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Курси</a>
+            <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Питання/Відповіді</a>
+            <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Петиції</a>
+        </nav>
 
-    <hr>
+        <button class="bg-white text-[#6B5B95] px-6 py-1.5 rounded-md text-sm font-medium hover:bg-gray-100 transition">
+            Увійти
+        </button>
+    </header>
 
-    <h3>Quick Access</h3>
-    <ul>
-        <li><a href="{% url 'starter_pack' %}">Starter Pack</a></li>
-        <li><a href="/admin/">Admin pannel</a></li>
-    </ul>
-    <div class="user-controls">
-    <p>Logged in as: <strong>{{ user.username }}</strong></p>
-    <a href="{% url 'profile' %}">Look At My Account</a>
-    </div>
+    <section class="bg-[#E3EBCF] py-24 md:py-32 flex flex-col items-center justify-center text-center px-4">
+        <h1 class="text-5xl md:text-7xl text-black mb-4 font-logo">Apps4U</h1>
+        <p class="text-xl text-gray-800">The place to get started with.</p>
+    </section>
+
+    <main class="flex-grow bg-white px-6 md:px-20 py-12 max-w-7xl mx-auto w-full">
+        <h2 class="text-3xl font-bold mb-8 text-black">Розділи</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <div class="bg-[#E0E8D0] p-6 rounded-md flex flex-col h-full border border-transparent hover:border-gray-300 transition shadow-sm">
+                <div class="mb-4 text-black">
+                    <i data-lucide="book-open" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-black">Стартерпак студента</h3>
+                <p class="text-gray-600 text-sm mb-6 flex-grow leading-relaxed">
+                    Дізнайся все для того, щоб успішно почати навчання без пригод!
+                </p>
+                <button class="bg-white w-full py-2 rounded border border-gray-300 text-sm font-medium hover:bg-gray-50 transition">
+                    Перейти
+                </button>
+            </div>
+
+            <div class="bg-[#E0E8D0] p-6 rounded-md flex flex-col h-full border border-transparent hover:border-gray-300 transition shadow-sm">
+                <div class="mb-4 text-black">
+                    <i data-lucide="bookmark" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-black">Матеріали курсів</h3>
+                <p class="text-gray-600 text-sm mb-6 flex-grow leading-relaxed">
+                    Корисні матеріали для навчання.
+                </p>
+                <button class="bg-white w-full py-2 rounded border border-gray-300 text-sm font-medium hover:bg-gray-50 transition">
+                    Перейти
+                </button>
+            </div>
+
+            <div class="bg-[#E0E8D0] p-6 rounded-md flex flex-col h-full border border-transparent hover:border-gray-300 transition shadow-sm">
+                <div class="mb-4 text-black">
+                    <i data-lucide="pen-tool" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-black">Питання/Відповіді</h3>
+                <p class="text-gray-600 text-sm mb-6 flex-grow leading-relaxed">
+                    Є питання? Не соромся, задавай тут.
+                </p>
+                <button class="bg-white w-full py-2 rounded border border-gray-300 text-sm font-medium hover:bg-gray-50 transition">
+                    Перейти
+                </button>
+            </div>
+
+            <div class="bg-[#E0E8D0] p-6 rounded-md flex flex-col h-full border border-transparent hover:border-gray-300 transition shadow-sm">
+                <div class="mb-4 text-black">
+                    <i data-lucide="file-text" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-black">Петиції</h3>
+                <p class="text-gray-600 text-sm mb-6 flex-grow leading-relaxed">
+                    Маєш круту ідею? Пропонуй її тут!
+                </p>
+                <button class="bg-white w-full py-2 rounded border border-gray-300 text-sm font-medium hover:bg-gray-50 transition">
+                    Перейти
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-[#EADDFF] pt-12 pb-8 px-6 md:px-20">
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
