@@ -25,15 +25,16 @@
         
         <nav class="hidden md:flex items-center space-x-2">
             <a href="#" class="bg-white text-[#6B5B95] px-4 py-1.5 rounded-md text-sm font-medium transition hover:bg-gray-100">Головна</a>
-            <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Стартерпак</a>
-            <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Курси</a>
+            <a href="{% url 'starter_pack' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Стартерпак</a>
+            <a href="{% url 'course_list' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Курси</a>
             <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Питання/Відповіді</a>
             <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Петиції</a>
         </nav>
-
-        <button class="bg-white text-[#6B5B95] px-6 py-1.5 rounded-md text-sm font-medium hover:bg-gray-100 transition">
-            Увійти
-        </button>
+        <a href="{% url 'profile' %}">
+            <button class="bg-white text-[#6B5B95] px-6 py-1.5 rounded-md text-sm font-medium hover:bg-gray-100 transition">
+                Увійти
+            </button>
+        </a>
     </header>
 
     <section class="bg-[#E3EBCF] py-24 md:py-32 flex flex-col items-center justify-center text-center px-4">
@@ -54,9 +55,11 @@
                 <p class="text-gray-600 text-sm mb-6 flex-grow leading-relaxed">
                     Дізнайся все для того, щоб успішно почати навчання без пригод!
                 </p>
-                <button class="bg-white w-full py-2 rounded border border-gray-300 text-sm font-medium hover:bg-gray-50 transition">
-                    Перейти
-                </button>
+                <a href="{% url 'starter_pack' %}">
+                    <button class="bg-white w-full py-2 rounded border border-gray-300 text-sm font-medium hover:bg-gray-50 transition">
+                        Перейти
+                    </button>
+                </a>
             </div>
 
             <div class="bg-[#E0E8D0] p-6 rounded-md flex flex-col h-full border border-transparent hover:border-gray-300 transition shadow-sm">
@@ -67,9 +70,11 @@
                 <p class="text-gray-600 text-sm mb-6 flex-grow leading-relaxed">
                     Корисні матеріали для навчання.
                 </p>
-                <button class="bg-white w-full py-2 rounded border border-gray-300 text-sm font-medium hover:bg-gray-50 transition">
-                    Перейти
-                </button>
+                <a href="{% url 'course_list' %}">
+                    <button class="bg-white w-full py-2 rounded border border-gray-300 text-sm font-medium hover:bg-gray-50 transition">
+                        Перейти
+                    </button>
+                </a>
             </div>
 
             <div class="bg-[#E0E8D0] p-6 rounded-md flex flex-col h-full border border-transparent hover:border-gray-300 transition shadow-sm">
