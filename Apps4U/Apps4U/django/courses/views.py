@@ -48,13 +48,13 @@ class AddCommentView(CreateView):
             id=self.kwargs['activity_id']
         )
 
-        form.instance.post = activity   # THIS FIXES THE ERROR
+        form.instance.post = activity
         return super().form_valid(form)
 
     def get_success_url(self):
         course_slug = self.kwargs['course_slug']
         activity_id = self.kwargs['activity_id']
-        # Reverse the URL dynamically
+
         return reverse(
                 'activity_detail',
                 kwargs={
