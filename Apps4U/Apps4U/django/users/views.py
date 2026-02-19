@@ -9,7 +9,7 @@ def edit_profile(request):
 
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('profile')
 
     else:
         form = ProfileUpdateForm(instance=request.user.profile)
