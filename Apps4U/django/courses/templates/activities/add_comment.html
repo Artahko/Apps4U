@@ -1,4 +1,4 @@
-{% block title %}Comment on activity{% endblock %}
+<!-- {% block title %}Comment on activity{% endblock %}
 {% block content %}
 
 
@@ -14,4 +14,62 @@
 </form>
 
 
-{% endblock %}
+{% endblock %} -->
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <link rel="stylesheet" href="{% static 'courses/comment.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apps4U UI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">Apps4U</div>
+        <nav>
+            <a href="{% url 'home' %}">Головна</a>
+            <a href="{% url 'starter_pack' %}">Стартерпак</a>
+            <a href="{% url 'course_list' %}">Курси</a>
+            <a href="#" class="active">Питання/Відповіді</a>
+            <a href="#">Петиції</a>
+        </nav>
+        <a href="{% url 'profile' %}">
+                <button class="profile-btn">Профіль</button>
+        </a>
+    </header>
+
+
+    <main class="content-area">
+        <div class="comment-header">
+            <h1>Adding comment to: {{ activity.activity_text }}</h1>
+        </div>
+
+        <footer class="reply-container">
+            <form method="POST" class="reply-bar">
+                {% csrf_token %}
+
+                {{ form.body }}
+
+                <div class="toolbar">
+                    <div class="icons">
+
+                    </div>
+                    <button type="submit" class="send-btn">↑</button>
+                </div>
+            </form>
+        </footer>
+
+        <div style="margin-top: 20px; text-align: center;">
+            <a href="{% url 'activity_detail' course_slug=course.slug activity_id=activity.id %}" style="color: #6a53a1;">
+                Cancel and go back
+            </a>
+        </div>
+    </main>
+</body>
+</html>
