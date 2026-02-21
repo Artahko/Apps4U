@@ -16,5 +16,9 @@ def edit_profile(request):
 
     return render(request, 'users/edit_profile.html', {'form': form})
 
+@login_required
 def profile(request):
-    return render(request, "users/profile.html")
+    return render(request, "users/profile.html", {"user": request.user})
+
+def login(request):
+    return render(request, "users/login.html")

@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('pages.urls')),
     path('сourses/', include('courses.urls')),
     path('profile/', include('users.urls')),
+    path('accounts/', include("allauth.urls")),
 ]
 
 if settings.DEBUG:
