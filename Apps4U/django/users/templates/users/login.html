@@ -1,20 +1,8 @@
 {% load socialaccount %}
-<div class="flex flex-col items-center justify-center min-h-[60vh]">
-    <div class="bg-white p-8 rounded-lg shadow-md border border-gray-200 w-full max-w-md text-center">
-        <h2 class="text-3xl font-logo text-[#6B5B95] mb-6">Вхід до Apps4U</h2>
+<div class="text-center">
+    <h2 class="font-logo text-[#6B5B95] mb-6">Вхід до Apps4U</h2>
 
-        <p class="text-gray-600 mb-8 text-sm">Використовуйте свій студентський акаунт для входу</p>
-
-        <a href="{% provider_login_url 'google' %}"
-           class="flex items-center justify-center gap-3 w-full bg-white border border-gray-300 py-3 rounded-md shadow-sm hover:bg-gray-50 transition font-medium text-gray-700">
-            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="w-5 h-5">
-            Увійти через Google
-        </a>
-
-        <div class="mt-8 pt-6 border-t border-gray-100">
-            <p class="text-xs text-gray-400 italic">
-                Тільки для студентів та викладачів
-            </p>
-        </div>
-    </div>
+    <a href="{% provider_login_url 'google' %}" class="...">
+        Увійти через Google
+    </a>
 </div>

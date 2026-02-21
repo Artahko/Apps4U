@@ -144,6 +144,8 @@ LOGOUT_REDIRECT_URL = 'login'
 # CHANGE IT LATER!!!!!!
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
 # SOFIA WAS HERE
 
 SITE_ID = 1

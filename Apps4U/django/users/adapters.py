@@ -10,6 +10,7 @@ class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
         # Logic for checking if user is an UCU student
         email = sociallogin.user.email
 
+        # CHANGE TO pn@ucu.edu.ua WHEN PRODUCT IS READY
         if not email.endswith('@ucu.edu.ua'):
             raise ImmediateHttpResponse(render(request, 'users/restricted_access.html'))
 
