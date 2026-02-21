@@ -141,6 +141,9 @@ LOGIN_REDIRECT_URL = 'home'
 
 LOGOUT_REDIRECT_URL = 'login'
 
+# CHANGE IT LATER!!!!!!
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # SOFIA WAS HERE
 
 SITE_ID = 1
@@ -149,9 +152,6 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
-
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
 
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
