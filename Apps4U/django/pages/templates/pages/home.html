@@ -34,7 +34,9 @@
             </nav>
 
             <a href="{% url 'profile' %}" class="flex items-center">
-                <div class="w-10 h-10 rounded-full bg-white text-[#6B5B95] flex items-center justify-center font-bold select-none">І</div>
+                <div class="w-10 h-10 rounded-full bg-white text-[#6B5B95] flex items-center justify-center font-bold select-none">
+                    <img src="{{ user.profile.icon.url }}" alt="Profile Picture" style="width:150px; border-radius:50%;">
+                </div>
             </a>
         </div>
     </header>
