@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Course, Activity, Comment
+from .models import Course, Activity, Material
 from django.views.generic.edit import CreateView
-from .forms import CommentForm
+from .forms import CommentForm, MaterialForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
@@ -35,6 +35,22 @@ def activity_detail(request, course_slug, activity_id):
         'course': course,
         'activity': activity,
     })
+
+def add_material(request, course_slug, activity_id):
+    activity = get_object_or_404(Activity, id=activity_id, course__slug=course_slug)
+
+    if request.method == "POST":
+        form = MaterialForm(request.POST, request.FILES)
+        if form.is_valid():
+            material = form.save(commit=False)
+            material.activity = activity # Link it to the activity
+            material.save()
+            # Send them back to the detail page after saving
+            return redirect('activity_detail', course_slug=course_slug, activity_id=activity_id)
+    else:
+        form = MaterialForm()
+
+    return render(request, 'activities/add_material.html', {'form': form, 'activity': activity})
 
 
 def add_comment(request, course_slug, activity_id):

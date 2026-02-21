@@ -34,4 +34,33 @@
 
 <br/><br/><br/>
 
+<h3>Activity Materials</h3>
+<div class="list-group">
+    {% for material in activity.materials.all %}
+        <div class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+                <strong>{{ material.name }}</strong>
+                <br>
+                <small class="text-muted">Uploaded on: {{ material.uploaded_at|date:"M d, Y" }}</small>
+            </div>
+
+            {% if material.upload %}
+                <a href="{{ material.upload.url }}" class="btn btn-primary btn-sm" target="_blank">
+                    View/Download File
+                </a>
+            {% else %}
+                <span class="badge bg-secondary">No file attached</span>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>No materials have been uploaded for this activity yet.</p>
+    {% endfor %}
+</div>
+
+<a href="{% url 'add_material' activity.course.slug activity.id %}" class="btn btn-success mt-3">
+    + Add New Material
+</a>
+
+<br/><br/><br/>
+
 <a href="{% url 'course_activities' course.slug %}">Back to list</a>
