@@ -46,7 +46,11 @@
 
             {% if material.upload %}
                 <a href="{{ material.upload.url }}" class="btn btn-primary btn-sm" target="_blank">
-                    View/Download File
+                    View
+                </a>
+                <br/>
+                <a href="{{ material.upload.url }}" download="{{ material.name }}">
+                    Download Now
                 </a>
             {% else %}
                 <span class="badge bg-secondary">No file attached</span>
@@ -56,6 +60,8 @@
         <p>No materials have been uploaded for this activity yet.</p>
     {% endfor %}
 </div>
+
+<br/><br/>
 
 <a href="{% url 'add_material' activity.course.slug activity.id %}" class="btn btn-success mt-3">
     + Add New Material
