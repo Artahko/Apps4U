@@ -1,37 +1,186 @@
-<h1>{{ activity.activity_text }}</h1>
-
-<p>{{ activity.description }}</p>
-
-<p>Published on: {{ activity.pub_date}}</p>
-
-<br/><br/>
-
-<h2>Comments</h2>
-
-{%if not activity.comments.all %}
-
-    No comments yet
-    <br/><br/>
-    <a href="{% url 'add_comment' course_slug=course.slug activity_id=activity.id %}">
-        Add one
-    </a>
-{%else%}
-
-    <a href="{% url 'add_comment' course_slug=course.slug activity_id=activity.id %}">Add comment</a>
-    <br/><br/>
-    {% for comment in activity.comments.all %}
-        <strong>
-            {{ comment.name }} -
-            {{ comment.date_added }}
-        </strong>
-        <br/>
-        {{ comment.body }}
-        <br/><br/>
-    {% endfor %}
-
-{%endif%}
 
 
-<br/><br/><br/>
 
-<a href="{% url 'course_activities' course.slug %}">Back to list</a>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ activity.title }} - Detail View</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --brand-purple: #614d92; /* The purple from your top bar */
+            --sidebar-green: #e9f0d8; /* The light green sidebar color */
+            --text-black: #000000;
+        }
+
+        body {
+            background-color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Top Purple Header */
+        .top-banner {
+            background-color: var(--brand-purple);
+            height: 70px;
+            width: 100%;
+        }
+
+        /* Main Wrapper */
+        .main-container {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* Sidebar Design */
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-green);
+            flex-shrink: 0;
+        }
+
+        /* Content Area */
+        .content {
+            flex-grow: 1;
+            padding: 60px 80px;
+            max-width: 900px;
+        }
+
+        /* Typography to match your screenshot */
+        h1, h2, h3 {
+            font-weight: 800;
+            color: var(--text-black);
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            font-size: 2.5rem;
+            margin-top: 40px;
+        }
+
+        .description-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 50px;
+        }
+
+        /* Material List Styling */
+        .materials-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .material-item {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+        }
+
+        .material-name {
+            font-weight: 700;
+            font-size: 1.4rem;
+            display: block;
+        }
+
+        .upload-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .action-links a {
+            color: #0000EE;
+            text-decoration: underline;
+            margin-right: 15px;
+            font-size: 1.1rem;
+        }
+
+        .add-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: #0000EE;
+            text-decoration: underline;
+        }
+
+        /* Comments Styling */
+        .comment-block {
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .content { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-banner"></div>
+
+    <div class="main-container">
+        <div class="sidebar"></div>
+
+        <div class="content">
+            <h1>{{ activity.activity_text }}</h1>
+
+            <p>{{ activity.description }}</p>
+
+            <h2 class="section-header">Матеріали</h2>
+            <div class="materials-list">
+                {% for material in activity.materials.all %}
+                <div class="material-item">
+                    <span class="material-name">{{ material.name }}</span>
+                    <span class="upload-date">Uploaded on: {{ material.uploaded_at|date:"M. d, Y" }}</span>
+                    <div class="action-links mt-1">
+                        {% if material.upload %}
+                            <a href="{{ material.upload.url }}" target="_blank">View</a>
+                            <a href="{{ material.upload.url }}" download>Download Now</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% empty %}
+                <p>No materials available.</p>
+                {% endfor %}
+            </div>
+
+            <div style="margin-top: 60px;">
+                <a href="{% url 'add_material' activity.course.slug activity.id %}" class="add-link">+ Add New Material</a>
+            </div>
+
+
+            <h1 class="section-header">Коментарі</h1>
+            <div class="comment-block">
+
+                {% for comment in activity.comments.all %}
+                <div class="mb-4">
+                    <strong>{{ comment.name }} - {{ comment.date_added }}</strong>
+                    <p>{{ comment.body }}</p>
+                </div>
+
+                {% empty %}
+
+                <p>No comments yet.</p>
+                {% endfor %}
+
+                <div style="margin-top: 60px;">
+                <a href="{% url 'add_comment' course_slug=course.slug activity_id=activity.id %}" class="add-link" style="margin-top: 0; margin-bottom: 20px; display: block;">Add comment</a>
+                </div>
+            </div>
+
+            <br><br>
+
+            <div style="margin-top: 60px;"></div>
+
+                <a href="{% url 'course_activities' activity.course.slug %}" class="add-link">Back to list</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

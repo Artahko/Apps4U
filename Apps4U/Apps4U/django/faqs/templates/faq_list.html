@@ -1,0 +1,300 @@
+
+
+<!-- <style>
+    /* Custom styling for the FAQ cards to match your mockup */
+    .faq-card {
+        background-color: #e9f0d8; /* The light green from your image */
+        border: none;
+        border-radius: 10px;
+        padding: 20px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .user-info img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+    .btn-respond {
+        background-color: white;
+        border: 1px solid #000;
+        border-radius: 8px;
+        padding: 5px 15px;
+        font-weight: 500;
+        text-decoration: none;
+        color: black;
+    } -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-6 md:px-12 mt-10">
+    <div class="flex justify-between items-center mb-10">
+        <h2 class="text-4xl font-extrabold text-black inline-block border-b-4 border-[#6B5B95] pb-2">
+            Питання/Відповіді
+        </h2>
+        <button onclick="toggleModal()" class="bg-[#6B5B95] text-white px-6 py-2 rounded-xl font-bold hover:bg-[#5a4a84] transition">
+            + Запитати
+        </button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for question in questions %}
+        <div class="faq-card shadow-sm flex flex-col justify-between p-6 h-full">
+
+            <div>
+                <div class="flex justify-between items-start mb-6">
+                    <h5 class="text-xl font-bold text-black leading-tight">{{ question.title }}</h5>
+                    <div class="text-[#6B5B95] opacity-30">
+                        <i data-lucide="help-circle"></i>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-3">
+                    <img class="w-10 h-10 rounded-full border-2 border-white object-cover"
+                        src="https://ui-avatars.com/api/?name={{ question.user.username }}&background=random"
+                        alt="User">
+
+                    <div>
+                        <div class="font-bold text-sm text-gray-800 leading-tight">
+                            {{ question.user.username }}
+                        </div>
+                        <div class="text-[#6B5B95] font-bold text-[10px] uppercase tracking-wider mt-0.5">
+                            {{ question.course.title }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-end mt-4">
+                <button type="button"
+                        onclick="console.log('Button clicked!'); openRespondModal('{{ question.id }}', '{{ question.title|escapejs }}', '{{ question.content|escapejs }}')"
+                        class="btn-respond hover:bg-black hover:text-white transition cursor-pointer px-4 py-2 bg-white border border-black rounded-lg relative z-10">
+                    Відповісти
+                </button>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-span-full py-10 text-center text-gray-500 italic">
+            Питань поки немає. Будьте першим, хто запитає!
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+<div id="askModal" class="hidden fixed inset-0 z-[60] flex items-center justify-center">
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+
+    <div class="relative bg-white w-full max-w-lg mx-4 rounded-2xl shadow-2xl p-8 z-10">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold">Нове питання</h3>
+            <button onclick="toggleModal()" class="text-gray-500 hover:text-black">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+
+        <form method="POST" action="{% url 'ask_question' %}">
+            {% csrf_token %}
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-bold mb-1">Тема</label>
+                    <input type="text" name="title" required
+                           class="w-full border-2 border-gray-200 rounded-lg p-3 focus:border-[#6B5B95] outline-none transition"
+                           placeholder="Наприклад: Як завантажити файл?">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold mb-1">Текст питання</label>
+                    <textarea name="content" required rows="4"
+                              class="w-full border-2 border-gray-200 rounded-lg p-3 focus:border-[#6B5B95] outline-none transition"
+                              placeholder="Опишіть ваше питання детальніше..."></textarea>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-sm font-bold mb-1">Оберіть курс</label>
+                <select name="course_id" required
+                        class="w-full border-2 border-gray-200 rounded-lg p-3 focus:border-[#6B5B95] outline-none bg-white">
+                    <option value="" disabled selected>Виберіть курс...</option>
+                    {% for course in courses %}
+                        <option value="{{ course.id }}">{{ course.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mt-8 flex space-x-3">
+                <button type="submit" class="flex-1 bg-[#6B5B95] text-white font-bold py-3 rounded-xl hover:bg-[#5a4a84] transition">
+                    Опублікувати
+                </button>
+                <button type="button" onclick="toggleModal()" class="flex-1 bg-gray-100 text-gray-700 font-bold py-3 rounded-xl hover:bg-gray-200 transition">
+                    Скасувати
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="respondModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeRespondModal()"></div>
+
+    <div class="relative z-10 bg-white w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col max-h-[85vh]">
+        <div class="p-6 border-b bg-white rounded-t-2xl">
+            <h3 id="modalQuestionTitle" class="text-xl font-bold text-black mb-3"></h3>
+            <div id="modalQuestionContent" class="text-sm text-gray-600 bg-gray-50 p-4 rounded-xl border-l-4 border-[#6B5B95]"></div>
+        </div>
+
+        <div id="answersContainer" class="p-6 overflow-y-auto bg-gray-50 flex-grow space-y-4"></div>
+
+        <div class="p-6 border-t bg-white rounded-b-2xl">
+            <form id="answerForm" onsubmit="submitAnswer(event)">
+                {% csrf_token %}
+                <textarea id="answerText" name="text" required rows="3"
+                          class="relative z-20 block w-full border-2 border-gray-100 rounded-xl p-3 focus:border-[#6B5B95] outline-none bg-gray-50 text-sm mb-3 text-black"
+                          placeholder="Напишіть вашу відповідь..."></textarea>
+                <button type="submit" class="w-full bg-[#6B5B95] text-white font-bold py-3 rounded-xl hover:bg-[#5a4a84] transition">
+                    Відповісти
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+let currentQuestionId = null;
+
+function openRespondModal(qId, qTitle) {
+    currentQuestionId = qId;
+
+    // Set Title
+    document.getElementById('modalQuestionTitle').innerText = qTitle;
+
+    // Set the main text of the question
+    const contentBox = document.getElementById('modalQuestionContent');
+    if (contentBox) {
+        contentBox.innerText = qDescription;
+    }
+
+    // Reset and show modal
+    document.getElementById('respondModal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+
+    // Load answers
+    loadAnswers(qId);
+}
+
+function loadAnswers(qId) {
+    const container = document.getElementById('answersContainer');
+    container.innerHTML = '<p class="text-center text-gray-400 py-4">Завантаження...</p>';
+
+    fetch(`/faqs/api/answers/${qId}/`)
+        .then(res => res.json())
+        .then(data => {
+            container.innerHTML = data.length ? '' : '<p class="text-center text-gray-400 py-4">Ще немає відповідей.</p>';
+            data.forEach(ans => {
+                container.innerHTML += `
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                        <div class="flex items-center mb-2 space-x-2">
+                            <div class="w-6 h-6 rounded-full bg-[#6B5B95] text-white text-[10px] flex items-center justify-center font-bold">
+                                ${ans.user[0].toUpperCase()}
+                            </div>
+                            <span class="font-bold text-xs text-gray-800">${ans.user}</span>
+                            <span class="text-[10px] text-gray-400">${ans.date}</span>
+                        </div>
+                        <p class="text-sm text-gray-700 ml-8">${ans.text}</p>
+                    </div>`;
+            });
+            // Auto-scroll to bottom
+            container.scrollTop = container.scrollHeight;
+        });
+}
+
+function submitAnswer(event) {
+    event.preventDefault();
+    const text = document.getElementById('answerText').value;
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    fetch(`/faqs/answer/${currentQuestionId}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrftoken,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `text=${encodeURIComponent(text)}`
+    }).then(response => {
+        if (response.ok) {
+            // This line redirects the user back to the FAQ list page
+            window.location.href = "{% url 'faq_list' %}";
+        } else {
+            alert("Помилка при відправці відповіді.");
+        }
+    });
+}
+
+function closeRespondModal() {
+    document.getElementById('respondModal').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+</script>
+
+
+<script>
+    function toggleModal() {
+        console.log("Button clicked!"); // Check your F12 console for this
+        const modal = document.getElementById('askModal');
+
+        if (modal) {
+            modal.classList.toggle('hidden');
+
+            // Toggle body scroll
+            if (!modal.classList.contains('hidden')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        } else {
+            console.error("Could not find element with ID 'askModal'");
+        }
+    }
+</script>
+
+
+<script>
+    function openRespondModal(qId, qTitle, qDescription) {
+        console.log("Opening modal for ID:", qId); // This helps you debug!
+
+        const modal = document.getElementById('respondModal');
+        const titleElement = document.getElementById('modalQuestionTitle');
+        const contentElement = document.getElementById('modalQuestionContent');
+
+        if (!modal) {
+            console.error("Error: Element with id 'respondModal' not found!");
+            return;
+        }
+
+        // Set the data
+        titleElement.innerText = qTitle;
+        contentElement.innerText = qDescription;
+
+        // Update the global variable for the answer submission
+        currentQuestionId = qId;
+
+        // Show the modal
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+
+        // Load the answers
+        loadAnswers(qId);
+    }
+
+    function closeRespondModal() {
+        document.getElementById('respondModal').classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+</script>
+{% endblock %}

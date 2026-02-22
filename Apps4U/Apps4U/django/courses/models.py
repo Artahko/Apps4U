@@ -19,6 +19,15 @@ class Activity(models.Model):
     def __str__(self):
         return self.activity_text
 
+class Material(models.Model):
+    activity = models.ForeignKey(Activity, related_name='materials', on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    upload = models.FileField(upload_to='activity_materials/', null=True, blank=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
 
 class FAQ(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='faqs')

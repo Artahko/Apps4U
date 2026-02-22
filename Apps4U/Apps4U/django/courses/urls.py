@@ -9,4 +9,7 @@ urlpatterns = [
     path("<slug:course_slug>/activities/<int:activity_id>/comment", views.add_comment, name="add_comment"),
     path("<slug:course_slug>/activities/", views.course_activities, name="course_activities"),
     path('<slug:course_slug>/', views.course_detail, name='course_detail'),
+    path('courses/<slug:course_slug>/activities/<int:activity_id>/add-material/',
+     views.add_material,
+     name='add_material'),
 ]
