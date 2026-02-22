@@ -1,13 +1,39 @@
-<div class="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
-    <div class="bg-red-50 p-8 rounded-lg border border-red-200 max-w-md shadow-sm">
-        <h2 class="text-2xl font-logo text-red-600 mb-4">Доступ обмежено</h2>
-        <p class="text-gray-700 mb-6">
-            Вибачте, але <strong>Apps4U</strong> доступний лише для власників пошти
-            <span class="font-bold text-[#6B5B95]"><strong>@ucu.edu.ua</strong></span>.
+{% load socialaccount %}
+{% load static %}
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вхід - Apps4U</title>
+
+    <link rel="icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body { font-family: 'SN Pro', sans-serif; }
+        .font-logo { font-family: 'Russo One', sans-serif; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-[#E3EBCF]">
+
+    <div class="bg-white p-10 md:p-16 rounded-2xl shadow-xl flex flex-col items-center max-w-sm w-full mx-4">
+        <div class="text-5xl tracking-wide font-logo text-[#6B5B95] mb-8" style="text-align: center;">
+            Доступ обмежено
+        </div>
+
+        <p class="text-gray-600 mb-10 text-center">
+            Вибачте, але <strong>Apps4U</strong> доступний лише для власників пошти <strong>@ucu.edu.ua</strong>
         </p>
         <a href="{% url 'login' %}"
            class="inline-block bg-[#6B5B95] text-white px-6 py-2 rounded hover:bg-[#5a4d7d] transition">
             Спробувати інший акаунт
         </a>
     </div>
-</div>
+
+</body>
+</html>

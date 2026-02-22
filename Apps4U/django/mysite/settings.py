@@ -125,9 +125,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
+# ARTEM WAS DOWN HERE
+
 STATIC_URL = 'static/'
 
-# ARTEM WAS DOWN HERE
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent

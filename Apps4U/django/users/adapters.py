@@ -9,14 +9,13 @@ class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
 
         # Logic for checking if user is an UCU student
         email = sociallogin.user.email
-
         # CHANGE TO pn@ucu.edu.ua WHEN PRODUCT IS READY
         if not email.endswith('@ucu.edu.ua'):
             raise ImmediateHttpResponse(render(request, 'users/restricted_access.html'))
 
         # This Saves Google user's data automatically
-        user.first_name = data.get("given_name", "")
-        user.last_name = data.get("family_name", "")
+        user.first_name = data.get("first_name", "")
+        user.last_name = data.get("last_name", "")
         user.email = data.get("email", "")
 
         return user
