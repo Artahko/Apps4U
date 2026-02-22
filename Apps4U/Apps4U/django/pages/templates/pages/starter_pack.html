@@ -1,15 +1,20 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apps4U - Starterpack</title>
+    <title>Apps4U - Стартерпак</title>
+
+    <link rel="icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
+
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
@@ -38,9 +43,15 @@
                 {% endif %}">Стартерпак</a>
             </nav>
 
-            <a href="{% url 'profile' %}" class="flex items-center">
-                <div class="w-10 h-10 rounded-full bg-white text-[#6B5B95] flex items-center justify-center font-bold select-none">І</div>
-            </a>
+            <div class="flex items-center space-x-4">
+                <a href="{% url 'profile' %}" class="group flex items-center">
+                    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white group-hover:border-[#E0E8D0] transition-colors duration-300">
+                        <img src="{{ user.profile.icon.url }}"
+                            alt="Profile Picture"
+                            class="w-full h-full object-cover">
+                    </div>
+                </a>
+            </div>
         </div>
     </header>
 
@@ -53,7 +64,7 @@
         <div class="space-y-4">
             <div class="border border-gray-300 rounded-lg p-5 bg-white shadow-sm">
                 <div class="flex justify-between items-center cursor-pointer">
-                    <h3 class="font-bold text-lg text-black">Title</h3>
+                    <h3 class="font-bold text-lg text-black">Пощирені питання</h3>
                     <i data-lucide="chevron-up" class="w-5 h-5 text-black"></i>
                 </div>
                 <div class="mt-3 text-gray-800 leading-relaxed text-base">
@@ -84,7 +95,7 @@
 
     </main>
 
-    <footer class="bg-[#EADDFF] pt-12 pb-8 px-6 md:px-20">
+    <footer class="bg-[#EADDFF] pt-12 pb-40 px-6 md:px-20">
     </footer>
 
     <script>

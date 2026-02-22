@@ -1,0 +1,88 @@
+{% load static %}
+
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Програма та рік - Аpps4U</title>
+
+    <link rel="icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body { font-family: 'SN Pro', sans-serif; }
+        .font-logo { font-family: 'Russo One', sans-serif; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-[#E3EBCF]">
+
+    <div class="min-h-[80vh] flex items-center justify-center bg-[#E3EBCF] px-4 py-12">
+        <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl max-w-md w-full border border-gray-100">
+
+            <div class="text-center mb-8">
+                <h2 class="text-4xl font-logo text-[#6B5B95] mb-2">Apps4U</h2>
+            </div>
+
+            <p class="text-gray-600 mb-8 text-center text-sm leading-relaxed">
+                Будь ласка, вкажіть вашу програму та рік навчання
+
+            <form method="POST" class="space-y-6">
+                {% csrf_token %}
+
+                <div>
+                    <label for="major" class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 ml-1">
+                        Програма
+                    </label>
+                    <div class="relative">
+                        <select name="major" id="major" required
+                                class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#6B5B95] focus:border-transparent appearance-none transition duration-200">
+                            <option value="" disabled selected>Оберіть програму...</option>
+                            <option value="CS">Комп'ютерні науки</option>
+                            <option value="DA">ІТ та Аналітика Рішень</option>
+                            <option value="RO">Робототехніка</option>
+
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
+                            <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="year" class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 ml-1">
+                        Рік навчання
+                    </label>
+                    <div class="relative">
+                        <select name="year" id="year" required
+                                class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#6B5B95] focus:border-transparent appearance-none transition duration-200">
+                            <option value="" disabled selected>Оберіть курс...</option>
+                            <option value="1">1 курс</option>
+                            <option value="2">2 курс</option>
+                            <option value="3">3 курс</option>
+                            <option value="4">4 курс</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
+                            <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit"
+                        class="w-full bg-[#6B5B95] text-white py-4 rounded-xl font-bold shadow-lg hover:bg-[#5a4d7d] hover:shadow-xl transition-all duration-200 transform active:scale-[0.98]">
+                    Почати користування
+                </button>
+            </form>
+
+            <p class="mt-8 text-center text-xs text-gray-400 bold red" style="color:red">
+                <strong>Вказуйте вашу справжню програму та рік, оскільки змінити це зможе тільки адміністратор!</strong>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,8 +1,40 @@
 {% load socialaccount %}
-<div class="text-center">
-    <h2 class="font-logo text-[#6B5B95] mb-6">Вхід до Apps4U</h2>
+{% load static %}
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вхід - Apps4U</title>
 
-    <a href="{% provider_login_url 'google' %}" class="...">
-        Увійти через Google
-    </a>
-</div>
+    <link rel="icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body { font-family: 'SN Pro', sans-serif; }
+        .font-logo { font-family: 'Russo One', sans-serif; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-[#E3EBCF]">
+
+    <div class="bg-white p-10 md:p-16 rounded-2xl shadow-xl flex flex-col items-center max-w-sm w-full mx-4">
+        <div class="text-5xl tracking-wide font-logo text-[#6B5B95] mb-8">
+            Apps4U
+        </div>
+
+        <p class="text-gray-600 mb-10 text-center">
+            Будь ласка, увійдіть за допомогою вашої пошти <strong>@ucu.edu.ua</strong>
+        </p>
+
+        <a href="{% provider_login_url 'google' process='login' %}"
+           class="flex items-center justify-center gap-3 w-full bg-white border border-gray-300 py-3 px-4 rounded-lg shadow-sm hover:bg-gray-50 transition duration-200 font-medium text-gray-700">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="w-5 h-5">
+            Увійти через Google
+        </a>
+    </div>
+</body>
+</html>
