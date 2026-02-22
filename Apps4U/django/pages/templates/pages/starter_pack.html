@@ -1,20 +1,15 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apps4U - Стартерпак</title>
-
-    <link rel="icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
+    <title>Apps4U - Starterpack</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
@@ -32,26 +27,14 @@
         <div class="flex items-center space-x-4">
             <nav class="hidden md:flex space-x-2">
                 <a href="{% url 'course_list' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Курси</a>
-                <a href="{% url 'faq_list' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">FAQs</a>
+                <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">FAQs</a>
                 <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Петиції</a>
-                <a href="{% url 'faq_list' %}"
-                class="px-4 py-2 text-sm rounded-lg transition-all duration-200
-                {% if request.resolver_match.url_name == 'starter_pack' %}
-                    bg-white text-[#6B5B95] font-bold
-                {% else %}
-                    text-white hover:text-gray-200
-                {% endif %}">Стартерпак</a>
+                <a href="{% url 'starter_pack' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Стартерпак</a>
             </nav>
 
-            <div class="flex items-center space-x-4">
-                <a href="{% url 'profile' %}" class="group flex items-center">
-                    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white group-hover:border-[#E0E8D0] transition-colors duration-300">
-                        <img src="{{ user.profile.icon.url }}"
-                            alt="Profile Picture"
-                            class="w-full h-full object-cover">
-                    </div>
-                </a>
-            </div>
+            <a href="{% url 'profile' %}" class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-white text-[#6B5B95] flex items-center justify-center font-bold select-none">І</div>
+            </a>
         </div>
     </header>
 
@@ -62,44 +45,104 @@
         </h1>
 
         <div class="space-y-4">
-            <div class="border border-gray-300 rounded-lg p-5 bg-white shadow-sm">
-                <div class="flex justify-between items-center cursor-pointer">
-                    <h3 class="font-bold text-lg text-black">Пощирені питання</h3>
-                    <i data-lucide="chevron-up" class="w-5 h-5 text-black"></i>
+            <div class="accordion-item rounded-lg p-5 bg-[#E0E8D0] hover:bg-[#d6e0c2] transition cursor-pointer">
+                <div class="accordion-header flex justify-between items-center">
+                    <h3 class="font-bold text-lg text-black">Які є локації для навчання та відпочинку?</h3>
+                    <i data-lucide="chevron-down" class="icon-toggle w-5 h-5 text-black"></i>
                 </div>
-                <div class="mt-3 text-gray-800 leading-relaxed text-base">
-                    Answer the frequently asked question in a simple sentence, a longish paragraph, or even in a list.
+
+                <div class="accordion-content hidden mt-3 text-gray-800 leading-relaxed text-base cursor-text">
+                    Для навчання та відпочинку в університеті передбачено кілька спеціалізованих локацій:
+                    <ul class="list-disc pl-5 mt-2 space-y-2">
+                        <li><strong>IT Space</strong> – профільний коворкінг для студентів Факультету прикладних наук. Розташований на цокольному поверсі Академічного корпусу (будівля, де знаходиться Трапезна).</li>
+                        <li><strong>Ideas Lab</strong> – міждисциплінарний простір для креативної роботи та стартапів, що знаходиться на цокольному поверсі Центру Шептицького (ЦШ).</li>
+                        <li><strong>Бібліотека УКУ</strong> – займає 2–4 поверхи Центру Шептицького. Тут доступні комп’ютери загального користування. Наголошуємо на необхідності дотримання тиші для забезпечення комфортних умов роботи всіх відвідувачів.</li>
+                        <li><strong>Студентський простір (К2)</strong> – зони, доступні за наявності читацького квитка УКУ. При спуску сходами до підвального приміщення Центру Шептицького: ліворуч знаходиться студентський простір.</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="rounded-lg p-5 bg-[#E0E8D0] hover:bg-[#d6e0c2] transition cursor-pointer flex justify-between items-center">
-                <h3 class="font-bold text-lg text-black">Title</h3>
-                <i data-lucide="chevron-down" class="w-5 h-5 text-black"></i>
+            <div class="accordion-item rounded-lg p-5 bg-[#E0E8D0] hover:bg-[#d6e0c2] transition cursor-pointer">
+                <div class="accordion-header flex justify-between items-center">
+                    <h3 class="font-bold text-lg text-black">Графік роботи локацій</h3>
+                    <i data-lucide="chevron-down" class="icon-toggle w-5 h-5 text-black"></i>
+                </div>
+
+                <div class="accordion-content hidden mt-3 text-gray-800 leading-relaxed text-base cursor-text">
+                    Завтра або у вівторок напишу
+                </div>
             </div>
 
-            <div class="rounded-lg p-5 bg-[#E0E8D0] hover:bg-[#d6e0c2] transition cursor-pointer flex justify-between items-center">
-                <h3 class="font-bold text-lg text-black">Title</h3>
-                <i data-lucide="chevron-down" class="w-5 h-5 text-black"></i>
+            <div class="accordion-item rounded-lg p-5 bg-[#E0E8D0] hover:bg-[#d6e0c2] transition cursor-pointer">
+                <div class="accordion-header flex justify-between items-center">
+                    <h3 class="font-bold text-lg text-black">Корисні посилання</h3>
+                    <i data-lucide="chevron-down" class="icon-toggle w-5 h-5 text-black"></i>
+                </div>
+
+                <div class="accordion-content hidden mt-3 text-gray-800 leading-relaxed text-base cursor-text">
+                    Корисні посилання:
+                    <ul class="list-disc pl-5 mt-2 space-y-2">
+                        <li><strong>ФПН 1 курс:</strong> <a href="https://t.me/+yFK1eXGINHBmZjBi" target="_blank" class="text-blue-600 hover:underline break-all">https://t.me/+yFK1eXGINHBmZjBi</a></li>
+                        <li><strong>Весь ФПН:</strong> <a href="https://t.me/+OIjfwu6QaAkwN2Uy" target="_blank" class="text-blue-600 hover:underline break-all">https://t.me/+OIjfwu6QaAkwN2Uy</a></li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="rounded-lg p-5 bg-[#E0E8D0] hover:bg-[#d6e0c2] transition cursor-pointer flex justify-between items-center">
-                <h3 class="font-bold text-lg text-black">Title</h3>
-                <i data-lucide="chevron-down" class="w-5 h-5 text-black"></i>
+            <div class="accordion-item rounded-lg p-5 bg-[#E0E8D0] hover:bg-[#d6e0c2] transition cursor-pointer">
+                <div class="accordion-header flex justify-between items-center">
+                    <h3 class="font-bold text-lg text-black">Які ресурси найкраще використовувати для навчання?</h3>
+                    <i data-lucide="chevron-down" class="icon-toggle w-5 h-5 text-black"></i>
+                </div>
+
+                <div class="accordion-content hidden mt-3 text-gray-800 leading-relaxed text-base cursor-text">
+                    lorem ipsum?
+                </div>
             </div>
 
-            <div class="rounded-lg p-5 bg-[#E0E8D0] hover:bg-[#d6e0c2] transition cursor-pointer flex justify-between items-center">
-                <h3 class="font-bold text-lg text-black">Title</h3>
-                <i data-lucide="chevron-down" class="w-5 h-5 text-black"></i>
+            <div class="accordion-item rounded-lg p-5 bg-[#E0E8D0] hover:bg-[#d6e0c2] transition cursor-pointer">
+                <div class="accordion-header flex justify-between items-center">
+                    <h3 class="font-bold text-lg text-black">Де отримати доступ до обладнання (3D-принтери та комплектуючі)?</h3>
+                    <i data-lucide="chevron-down" class="icon-toggle w-5 h-5 text-black"></i>
+                </div>
+
+                <div class="accordion-content hidden mt-3 text-gray-800 leading-relaxed text-base cursor-text">
+                    Лабораторія прототипування розташована безпосередньо в IT Space:
+                    <ul class="list-disc pl-5 mt-2 space-y-2">
+                        <li><strong>Аудиторія 009:</strong> Тут ви можете звернутися до відповідальної особи (Володі) щодо отримання необхідних деталей та інструментів.</li>
+                        <li><strong>Аудиторія 014:</strong> Обладнана 3D-принтерами для реалізації технічних проектів.</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
     </main>
 
-    <footer class="bg-[#EADDFF] pt-12 pb-40 px-6 md:px-20">
+    <footer class="bg-[#EADDFF] pt-12 pb-8 px-6 md:px-20">
     </footer>
 
     <script>
         lucide.createIcons();
+        const accordionItems = document.querySelectorAll('.accordion-item');
+
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            const content = item.querySelector('.accordion-content');
+            const icon = item.querySelector('.icon-toggle');
+            header.addEventListener('click', () => {
+                content.classList.toggle('hidden');
+
+                if (content.classList.contains('hidden')) {
+                    item.classList.remove('bg-white', 'border', 'border-gray-300', 'shadow-sm');
+                    item.classList.add('bg-[#E0E8D0]', 'hover:bg-[#d6e0c2]');
+                    icon.setAttribute('data-lucide', 'chevron-down');
+                } else {
+                    item.classList.remove('bg-[#E0E8D0]', 'hover:bg-[#d6e0c2]');
+                    item.classList.add('bg-white', 'border', 'border-gray-300', 'shadow-sm');
+                    icon.setAttribute('data-lucide', 'chevron-up');
+                }
+                lucide.createIcons();
+            });
+        });
     </script>
 </body>
 </html>
