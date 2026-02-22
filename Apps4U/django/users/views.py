@@ -27,13 +27,17 @@ def profile(request):
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
-        form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        p_form = ProfileUpdateForm(request.POST,
+                                   request.FILES,
+                                   instance=request.user.profile)
 
-        if form.is_valid():
-            form.save()
+        if p_form.is_valid():
+            p_form.save()
             return redirect('profile')
-
     else:
-        form = ProfileUpdateForm(instance=request.user.profile)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
 
-    return render(request, 'users/edit_profile.html', {'form': form})
+    context = {
+        'p_form': p_form
+    }
+    return render(request, 'users/edit_profile.html', context)
