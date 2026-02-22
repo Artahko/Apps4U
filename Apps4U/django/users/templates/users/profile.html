@@ -1,27 +1,118 @@
-<div class="profile-container">
-    <h1>My Student Profile</h1>
+{% load static %}
 
-    <div class="profile-header">
-        <img src="{{ user.profile.icon.url }}" alt="Profile Picture" style="width:150px; border-radius:50%;">
-        <h2>{{ user.username }}</h2>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apps4U - Профіль</title>
+
+    <link rel="icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { font-family: 'SN Pro', sans-serif; }
+        .font-logo { font-family: 'Russo One', sans-serif; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-white pt-16">
+
+    <header class="bg-[#6B5B95] text-white h-16 py-2 px-6 md:px-12 flex items-center justify-between fixed top-0 left-0 w-full z-50">
+        <div class="text-3xl tracking-wide font-logo flex-shrink-0">
+            <a href="{% url 'home' %}">Apps4U</a>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <nav class="hidden md:flex space-x-2">
+                <a href="{% url 'course_list' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Курси</a>
+                <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">FAQs</a>
+                <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Петиції</a>
+                <a href="{% url 'starter_pack' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Стартерпак</a>
+            </nav>
+
+            <a href="{% url 'profile' %}" class="group flex items-center">
+                <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white group-hover:border-[#E0E8D0] transition-colors duration-300">
+                    <img src="{{ user.profile.icon.url }}" alt="Profile Picture" class="w-full h-full object-cover">
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center p-6">
+    <div class="bg-[#E3EBCF] rounded-2xl p-8 md:p-10 shadow-sm max-w-3xl w-full border border-gray-100 relative">
+
+            <div class="absolute top-6 right-6 flex space-x-4">
+                <a href="{% url 'edit_profile' %}" title="Редагувати" class="hover:opacity-70 transition">
+                    <img src="{% static 'images/edit.png' %}" alt="Edit" class="w-6 h-6">
+                </a>
+                <button onclick="toggleLogoutModal()" title="Вийти" class="hover:opacity-70 transition">
+                    <img src="{% static 'images/exit.png' %}" alt="Exit" class="w-6 h-6">
+                </button>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-8 items-start mb-8">
+                <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-white shadow-sm flex-shrink-0">
+                    <img src="{{ user.profile.icon.url }}" alt="Profile Picture" class="w-full h-full object-cover">
+                </div>
+
+                <div class="flex-grow pt-2">
+                    <h2 class="text-3xl font-bold text-black mb-6">{{ user.first_name }} {{ user.last_name|default:user.username }}</h2>
+                    <div class="space-y-2 text-lg text-black">
+                        <p><span class="font-bold">Курс:</span> {{ user.profile.year_of_study|default:"Не вказано" }}</p>
+                        <p><span class="font-bold">Програма:</span> {{ user.profile.major|default:"Не вказано" }}</p>
+                        <p><span class="font-bold">Email:</span> {{ user.email }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <h3 class="text-xl font-bold text-black mb-3">Про себе:</h3>
+                <p class="text-gray-800 leading-relaxed text-justify">
+                    {{ user.profile.about|default:"Користувач ще не додав опис."|linebreaks }}
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <div id="logoutModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl p-8 max-w-sm w-full shadow-2xl text-center">
+            <h3 class="text-2xl font-bold text-black mb-4">Ви дійсно хочете вийти з акаунта Apps4U?</h3>
+
+            <div class="flex space-x-4">
+                <button onclick="toggleLogoutModal()" class="flex-1 py-3 border border-gray-300 rounded-xl font-medium hover:bg-gray-50 transition">
+                    Скасувати
+                </button>
+                <form method="post" action="{% url 'logout' %}" class="flex-1">
+                    {% csrf_token %}
+                    <button type="submit" class="w-full bg-red-500 text-white py-3 rounded-xl font-medium hover:bg-red-600 transition">
+                        Вийти
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <div class="profile-info">
-        <p><strong>Major:</strong> {{ user.profile.get_major_display }}</p>
-        <p><strong>Course Year:</strong> {{ user.profile.get_year_of_study_display }}</p>
+    <footer class="bg-[#EADDFF] pt-12 pb-8 px-6 md:px-20"></footer>
 
-        <h3>About Me</h3>
-        <p>{{ user.profile.about|linebreaks|default:"No bio added yet." }}</p>
-    </div>
-    <hr>
+    <script>lucide.createIcons();</script>
+    <script>
+        function toggleLogoutModal() {
+            const modal = document.getElementById('logoutModal');
+            modal.classList.toggle('hidden');
+        }
 
-<p><a href="{% url 'edit_profile' %}">Edit profile</a></p>
-<p><a href="{% url 'home' %}">Home page</a></p>
-
-<form method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit"
-                    class="w-full border border-red-500 text-red-500 py-2 rounded hover:bg-red-50 transition">
-                Вийти з акаунта
-            </button>
-        </form>
+        window.onclick = function(event) {
+            const modal = document.getElementById('logoutModal');
+            if (event.target == modal) {
+                toggleLogoutModal();
+            }
+        }
+    </script>
+</body>
+</html>
