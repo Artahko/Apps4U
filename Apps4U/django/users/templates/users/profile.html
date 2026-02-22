@@ -64,8 +64,8 @@
                 <div class="flex-grow pt-2">
                     <h2 class="text-3xl font-bold text-black mb-6">{{ user.first_name }} {{ user.last_name|default:user.username }}</h2>
                     <div class="space-y-2 text-lg text-black">
-                        <p><span class="font-bold">Курс:</span> {{ user.profile.year_of_study|default:"Не вказано" }}</p>
-                        <p><span class="font-bold">Програма:</span> {{ user.profile.major|default:"Не вказано" }}</p>
+                        <p><span class="font-bold">Курс:</span> {{ user.profile.get_year_of_study_display |default:"Не вказано" }}</p>
+                        <p><span class="font-bold">Програма:</span> {{ user.profile.get_major_display |default:"Не вказано" }}</p>
                         <p><span class="font-bold">Email:</span> {{ user.email }}</p>
                     </div>
                 </div>
