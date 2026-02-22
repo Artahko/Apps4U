@@ -1,9 +1,13 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apps4U - Home page</title>
+    <title>Apps4U</title>
+
+    <link rel="icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,9 +37,15 @@
                 <a href="{% url 'starter_pack' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Стартерпак</a>
             </nav>
 
-            <a href="{% url 'profile' %}" class="flex items-center">
-                <div class="w-10 h-10 rounded-full bg-white text-[#6B5B95] flex items-center justify-center font-bold select-none">І</div>
-            </a>
+            <div class="flex items-center space-x-4">
+                <a href="{% url 'profile' %}" class="group flex items-center">
+                    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white group-hover:border-[#E0E8D0] transition-colors duration-300">
+                        <img src="{{ user.profile.icon.url }}"
+                            alt="Profile Picture"
+                            class="w-full h-full object-cover">
+                    </div>
+                </a>
+            </div>
         </div>
     </header>
 
@@ -45,7 +55,7 @@
                 Apps4U
             </h1>
             <p class="text-xl md:text-2xl text-gray-800">
-                The place to get started with.
+                Твій путівник у навчання
             </p>
         </div>
     </section>

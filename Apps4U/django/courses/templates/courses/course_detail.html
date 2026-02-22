@@ -1,9 +1,13 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apps4U - {{ course.title }}</title>
+
+    <link rel="icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,27 +37,29 @@
                 <a href="{% url 'starter_pack' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Стартерпак</a>
             </nav>
 
-            <a href="{% url 'profile' %}" class="flex items-center">
-                <div class="w-10 h-10 rounded-full bg-white text-[#6B5B95] flex items-center justify-center font-bold select-none">І</div>
+            <a href="{% url 'profile' %}" class="group flex items-center">
+                <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white group-hover:border-[#E0E8D0] transition-colors duration-300">
+                    <img src="{{ user.profile.icon.url }}" alt="Profile Picture" class="w-full h-full object-cover">
+                </div>
             </a>
         </div>
     </header>
 
     <div class="flex-grow pt-16 flex flex-col md:flex-row">
-        
+
         <aside class="w-full md:w-[320px] bg-[#E4EACD] flex-shrink-0 p-8 flex flex-col gap-6">
             <div class="flex items-center gap-3 font-semibold text-gray-900 mt-4 md:mt-8">
                 <i data-lucide="info" class="w-5 h-5"></i>
                 <span class="text-xl">Контент</span>
             </div>
-            
+
             <nav class="flex flex-col gap-2 mt-4">
                 <a href="#" class="bg-white text-black px-4 py-3 rounded-xl text-[16px]">
                     Про Курс
                 </a>
-                
+
                 <a href="{% url 'course_activities' course.slug %}" class="text-[#4A4A4A] hover:bg-white/60 px-4 py-3 rounded-xl text-[16px] transition">
-                    Діяльності
+                    Активності
                 </a>
                 <a href="#" class="text-[#4A4A4A] hover:bg-white/60 px-4 py-3 rounded-xl text-[16px] transition">
                     Пости
@@ -61,10 +67,10 @@
                 <a href="{% url 'course_faq' course.slug %}" class="text-[#4A4A4A] hover:bg-white/60 px-4 py-3 rounded-xl text-[16px] transition">
                     Поширені Запитання
                 </a>
-                
+
                 <div class="mt-8 border-t border-black pt-6">
                     <a href="{% url 'course_list' %}" class="text-[#4A4A4A] hover:text-black text-[16px] flex items-center gap-2 transition">
-                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Назад
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Назад до курсів
                     </a>
                 </div>
             </nav>
@@ -75,7 +81,7 @@
                 <h1 class="text-3xl md:text-4xl font-bold text-[#000000] mb-8">
                     {{ course.title }}
                 </h1>
-                
+
                 <div class="text-[#4A4A4A] text-lg leading-relaxed space-y-6">
                     {{ course.description|linebreaks }}
                 </div>
