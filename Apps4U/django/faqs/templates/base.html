@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apps4U</title>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=SN+Pro:wght@400;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'SN Pro', sans-serif; padding-top: 80px; }
+        .font-logo { font-family: 'Russo One', sans-serif; }
+        .faq-card { background-color: #e9f0d8; border-radius: 12px; padding: 24px; }
+        .btn-respond { background: white; border: 1px solid black; padding: 4px 12px; border-radius: 8px; font-weight: 600; color: black; text-decoration: none; }
+    </style>
+</head>
+<body class="bg-white">
+    <header class="bg-[#6B5B95] text-white h-16 py-2 px-6 md:px-12 flex items-center justify-between fixed top-0 left-0 w-full z-50">
+        <div class="text-3xl tracking-wide font-logo flex-shrink-0">
+            <a href="{% url 'home' %}">Apps4U</a>
+        </div>
+        <div class="flex items-center space-x-4">
+            <nav class="hidden md:flex space-x-2">
+                <a href="{% url 'course_list' %}" class="px-3 py-1.5 text-sm hover:text-gray-200">Курси</a>
+                <a href="{% url 'faq_list' %}"
+                class="px-4 py-2 text-sm rounded-lg transition-all duration-200
+                {% if request.resolver_match.url_name == 'faq_list' %}
+                    bg-white text-[#6B5B95] font-bold
+                {% else %}
+                    text-white hover:text-gray-200
+                {% endif %}">FAQs</a>
+                <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Петиції</a>
+                <a href="{% url 'starter_pack' %}" class="px-3 py-1.5 text-sm hover:text-gray-200">Стартерпак</a>
+            </nav>
+            <a href="{% url 'profile' %}" class="w-10 h-10 rounded-full bg-white text-[#6B5B95] flex items-center justify-center font-bold">І</a>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
