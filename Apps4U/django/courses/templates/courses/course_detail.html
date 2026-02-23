@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apps4U - {{ course.title }}</title>
+    <title>Apps4U - Курси</title>
 
     <link rel="icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
 
@@ -31,8 +31,12 @@
 
         <div class="flex items-center space-x-4">
             <nav class="hidden md:flex space-x-2">
-                <a href="{% url 'course_list' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Курси</a>
-                <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">FAQs</a>
+                <a href="{% url 'course_list' %}"
+                class="px-4 py-2 text-sm rounded-lg transition-all duration-200 bg-white text-[#6B5B95] font-bold">
+                Курси
+                </a>
+
+                <a href="{% url 'faq_list' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">FAQs</a>
                 <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Петиції</a>
                 <a href="{% url 'starter_pack' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Стартерпак</a>
             </nav>
