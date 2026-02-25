@@ -6,5 +6,7 @@ urlpatterns = [
     path('ask/', views.ask_question, name='ask_question'),
     path('<int:question_id>/', views.faq_detail, name='faq_detail'),
     path('api/answers/<int:question_id>/', views.get_answers, name='get_answers'),
-    path('answer/<int:question_id>/', views.post_answer, name='post_answer'),
+    # path('<int:question_id>/', views.post_answer, name=''),
+    path('api/answers/<int:question_id>/comment', views.add_answer, name='add_answer'),
+
 ]
