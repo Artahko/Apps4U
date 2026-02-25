@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apps4U</title>
@@ -20,7 +21,7 @@
         </div>
         <div class="flex items-center space-x-4">
             <nav class="hidden md:flex space-x-2">
-                <a href="{% url 'course_list' %}" class="px-3 py-1.5 text-sm hover:text-gray-200">Курси</a>
+                <a href="{% url 'course_list' %}" class="px-4 py-2 text-sm hover:text-gray-200">Курси</a>
                 <a href="{% url 'faq_list' %}"
                 class="px-4 py-2 text-sm rounded-lg transition-all duration-200
                 {% if request.resolver_match.url_name == 'faq_list' %}
@@ -28,8 +29,8 @@
                 {% else %}
                     text-white hover:text-gray-200
                 {% endif %}">FAQs</a>
-                <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Петиції</a>
-                <a href="{% url 'starter_pack' %}" class="px-3 py-1.5 text-sm hover:text-gray-200">Стартерпак</a>
+                <a href="#" class="px-4 py-2 text-sm hover:text-gray-200 transition">Петиції</a>
+                <a href="{% url 'starter_pack' %}" class="px-4 py-2 text-sm hover:text-gray-200">Стартерпак</a>
             </nav>
                 <a href="{% url 'profile' %}" class="group flex items-center">
                     <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white group-hover:border-[#E0E8D0] transition-colors duration-300">

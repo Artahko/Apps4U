@@ -65,6 +65,29 @@ def post_answer(request, question_id):
                 question=question,
                 text=text
             )
-            # Return a 200 OK status to let JavaScript know it can redirect
+
             return HttpResponse(status=200)
     return HttpResponse(status=400)
+
+def add_answer(request, question_id):
+    question_obj = get_object_or_404(Question, id=question_id)
+
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer = form.save(commit=False)
+
+            answer.question = question_obj
+
+            if request.user.is_authenticated:
+                answer.user = request.user
+            else:
+
+                return redirect('login')
+
+            answer.save()
+            return redirect('faq_detail', question_id=question_obj.id)
+    else:
+        form = AnswerForm()
+
+    return render(request, 'add_answer.html', {'form': form, 'question': question_obj})
