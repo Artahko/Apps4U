@@ -65,9 +65,6 @@
                 <a href="{% url 'course_activities' course.slug %}" class="bg-white text-black px-4 py-3 rounded-xl text-[16px]">
                     Активності
                 </a>
-                <a href="#" class="text-[#4A4A4A] hover:bg-white/60 px-4 py-3 rounded-xl text-[16px] transition">
-                    Пости
-                </a>
                 <a href="{% url 'course_faq' course.slug %}" class="text-[#4A4A4A] hover:bg-white/60 px-4 py-3 rounded-xl text-[16px] transition">
                     Поширені запитання
                 </a>
@@ -88,11 +85,11 @@
                 <ul class="space-y-2 border border-gray-100 rounded-3xl p-3 bg-gray-50/30">
                     {% for activity in course.activity_set.all %}
                         <li>
-                            <a href="{% url 'activity_detail' course.slug activity.id %}" 
+                            <a href="{% url 'activity_detail' course.slug activity.id %}"
                             class="flex items-center gap-4 w-full p-4 rounded-2xl hover:bg-[#E4EACD] text-[#4A4A4A] hover:text-black transition-all duration-200 group">
-                                
+
                                 <span class="text-lg font-medium">{{ activity.activity_text }}</span>
-                                
+
                                 <div class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
                                     <span class="text-sm font-bold text-[#6B5B95]">Перейти</span>
                                 </div>
