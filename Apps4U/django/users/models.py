@@ -30,6 +30,5 @@ class Profile(models.Model):
         verbose_name="Current Course Year"
     )
 
-
     def __str__(self):
         return f'{self.user.username} - Profile'
