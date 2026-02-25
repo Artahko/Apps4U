@@ -81,19 +81,19 @@
         </aside>
 
         <main class="w-full p-6 md:p-12 flex justify-center">
-            
+
             <div class="w-full max-w-2xl bg-white rounded-3xl shadow-sm border border-gray-100 p-8 h-fit mt-4 md:mt-8">
-                
+
                 <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 border-b border-gray-100 pb-4">
-                    Додати матеріал для <span class="text-[#6B5B95]">{{ activity.title }}</span>
+                    Додати матеріал для <span class="text-[#6B5B95]">{{ activity.activity_text }}</span>
                 </h2>
 
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    
-                    <div class="space-y-5 
+
+                    <div class="space-y-5
                                 [&>p]:flex [&>p]:flex-col [&>p]:gap-2
-                                [&_label]:text-sm [&_label]:font-semibold [&_label]:text-gray-700 
+                                [&_label]:text-sm [&_label]:font-semibold [&_label]:text-gray-700
                                 [&_input]:w-full [&_input]:border [&_input]:border-gray-200 [&_input]:rounded-xl [&_input]:px-4 [&_input]:py-3 [&_input]:bg-gray-50 [&_input]:focus:bg-white [&_input]:focus:ring-2 [&_input]:focus:ring-[#6B5B95]/50 [&_input]:focus:border-[#6B5B95] [&_input]:outline-none [&_input]:transition-all
                                 [&_textarea]:w-full [&_textarea]:border [&_textarea]:border-gray-200 [&_textarea]:rounded-xl [&_textarea]:px-4 [&_textarea]:py-3 [&_textarea]:bg-gray-50 [&_textarea]:focus:bg-white [&_textarea]:focus:ring-2 [&_textarea]:focus:ring-[#6B5B95]/50 [&_textarea]:focus:border-[#6B5B95] [&_textarea]:outline-none [&_textarea]:transition-all
                                 [&_select]:w-full [&_select]:border [&_select]:border-gray-200 [&_select]:rounded-xl [&_select]:px-4 [&_select]:py-3 [&_select]:bg-gray-50 [&_select]:focus:bg-white [&_select]:focus:ring-2 [&_select]:focus:ring-[#6B5B95]/50 [&_select]:focus:border-[#6B5B95] [&_select]:outline-none [&_select]:transition-all
@@ -102,18 +102,18 @@
                     </div>
 
                     <div class="flex items-center justify-end gap-4 mt-10 pt-6 border-t border-gray-100">
-                        
-                        <a href="{% url 'activity_detail' activity.course.slug activity.id %}" 
+
+                        <a href="{% url 'activity_detail' activity.course.slug activity.id %}"
                         class="text-sm font-medium text-gray-500 hover:text-red-500 transition-colors px-2 py-2">
                             Скасувати
                         </a>
 
-                        <button type="submit" 
+                        <button type="submit"
                                 class="flex items-center gap-2 bg-[#6B5B95] hover:bg-[#5a4c7e] text-white px-6 py-2.5 rounded-xl font-semibold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95">
                             Зберегти
                             <i data-lucide="save" class="w-4 h-4 ml-1"></i>
                         </button>
-                        
+
                     </div>
                 </form>
 

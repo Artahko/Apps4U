@@ -21,3 +21,7 @@ class MaterialForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g. Glue stick'}),
         }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['upload'].required = True
+        self.fields['upload'].widget.attrs.update({'required': True})
