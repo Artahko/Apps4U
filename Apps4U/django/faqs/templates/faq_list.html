@@ -143,20 +143,16 @@ let currentQuestionId = null;
 function openRespondModal(qId, qTitle) {
     currentQuestionId = qId;
 
-    // Set Title
     document.getElementById('modalQuestionTitle').innerText = qTitle;
 
-    // Set the main text of the question
     const contentBox = document.getElementById('modalQuestionContent');
     if (contentBox) {
         contentBox.innerText = qDescription;
     }
 
-    // Reset and show modal
     document.getElementById('respondModal').classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 
-    // Load answers
     loadAnswers(qId);
 }
 
@@ -181,7 +177,6 @@ function loadAnswers(qId) {
                         <p class="text-sm text-gray-700 ml-8">${ans.text}</p>
                     </div>`;
             });
-            // Auto-scroll to bottom
             container.scrollTop = container.scrollHeight;
         });
 }
@@ -200,7 +195,6 @@ function submitAnswer(event) {
         body: `text=${encodeURIComponent(text)}`
     }).then(response => {
         if (response.ok) {
-            // This line redirects the user back to the FAQ list page
             window.location.href = "{% url 'faq_list' %}";
         } else {
             alert("Помилка при відправці відповіді.");
@@ -217,13 +211,12 @@ function closeRespondModal() {
 
 <script>
     function toggleModal() {
-        console.log("Button clicked!"); // Check your F12 console for this
+        console.log("Button clicked!");
         const modal = document.getElementById('askModal');
 
         if (modal) {
             modal.classList.toggle('hidden');
 
-            // Toggle body scroll
             if (!modal.classList.contains('hidden')) {
                 document.body.style.overflow = 'hidden';
             } else {
@@ -238,7 +231,7 @@ function closeRespondModal() {
 
 <script>
     function openRespondModal(qId, qTitle, qDescription) {
-        console.log("Opening modal for ID:", qId); // This helps you debug!
+        console.log("Opening modal for ID:", qId);
 
         const modal = document.getElementById('respondModal');
         const titleElement = document.getElementById('modalQuestionTitle');
@@ -249,18 +242,14 @@ function closeRespondModal() {
             return;
         }
 
-        // Set the data
         titleElement.innerText = qTitle;
         contentElement.innerText = qDescription;
 
-        // Update the global variable for the answer submission
         currentQuestionId = qId;
 
-        // Show the modal
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
-
-        // Load the answers
+    
         loadAnswers(qId);
     }
 
