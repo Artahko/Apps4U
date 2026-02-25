@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class Question(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey('courses.Course', on_delete=models.CASCADE, related_name='user_questions', default=1)
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=50)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 

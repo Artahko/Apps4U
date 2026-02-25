@@ -36,9 +36,9 @@
                 Курси
                 </a>
 
-                <a href="{% url 'faq_list' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">FAQs</a>
-                <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Петиції</a>
-                <a href="{% url 'starter_pack' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Стартерпак</a>
+                <a href="{% url 'faq_list' %}" class="px-4 py-2 text-sm hover:text-gray-200 transition">FAQs</a>
+                <a href="#" class="px-4 py-2 text-sm hover:text-gray-200 transition">Петиції</a>
+                <a href="{% url 'starter_pack' %}" class="px-4 py-2 text-sm hover:text-gray-200 transition">Стартерпак</a>
             </nav>
 
             <a href="{% url 'profile' %}" class="group flex items-center">
@@ -88,11 +88,11 @@
                 <ul class="space-y-2 border border-gray-100 rounded-3xl p-3 bg-gray-50/30">
                     {% for activity in course.activity_set.all %}
                         <li>
-                            <a href="{% url 'activity_detail' course.slug activity.id %}" 
+                            <a href="{% url 'activity_detail' course.slug activity.id %}"
                             class="flex items-center gap-4 w-full p-4 rounded-2xl hover:bg-[#E4EACD] text-[#4A4A4A] hover:text-black transition-all duration-200 group">
-                                
+
                                 <span class="text-lg font-medium">{{ activity.activity_text }}</span>
-                                
+
                                 <div class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
                                     <span class="text-sm font-bold text-[#6B5B95]">Перейти</span>
                                 </div>

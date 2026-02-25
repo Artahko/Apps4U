@@ -8,7 +8,8 @@ class QuestionForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Я не розумію...'
+                'placeholder': 'Я не розумію...',
+                'maxlength': '50',
             }),
             'content': forms.Textarea(attrs={
                 'class': 'form-control',
