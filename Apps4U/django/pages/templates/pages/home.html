@@ -74,9 +74,11 @@
             <p class="text-gray-600 text-sm mb-6 flex-grow leading-relaxed">
                 Маєш круту ідею? Пропонуй її тут!
             </p>
-            <button class="bg-white w-full py-2 rounded border border-black text-sm font-medium hover:bg-gray-50 transition">
-                Перейти
-            </button>
+            <a href="{% url 'petition_list' %}">
+                <button class="bg-white w-full py-2 rounded border border-black text-sm font-medium hover:bg-gray-50 transition">
+                    Перейти
+                </button>
+            </a>
         </div>
 
     </div>

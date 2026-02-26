@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'faqs',
+    'petitions',
     'django.contrib.sites',
     'allauth',
     'allauth.account',

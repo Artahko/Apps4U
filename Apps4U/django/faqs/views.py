@@ -9,11 +9,12 @@ from django.http import JsonResponse, HttpResponse
 @login_required
 def faq_list(request):
     questions = Question.objects.all().order_by('-created_at')
-    courses = Course.objects.all() # Fetch courses for the dropdown
+    courses = Course.objects.all()
     return render(request, 'faq_list.html', {
         'questions': questions,
         'courses': courses
     })
+
 
 @login_required
 def faq_detail(request, question_id):
@@ -29,6 +30,8 @@ def faq_detail(request, question_id):
     else:
         form = AnswerForm()
     return render(request, 'faq_detail.html', {'question': question, 'form': form})
+
+
 
 @login_required
 def ask_question(request):
@@ -47,24 +50,6 @@ def ask_question(request):
             )
     return redirect('faq_list')
 
-
-
-
-
-@login_required
-def post_answer(request, question_id):
-    if request.method == "POST":
-        text = request.POST.get('text')
-        question = get_object_or_404(Question, id=question_id)
-        if text:
-            Answer.objects.create(
-                user=request.user,
-                question=question,
-                text=text
-            )
-
-            return HttpResponse(status=200)
-    return HttpResponse(status=400)
 
 @login_required
 def add_answer(request, question_id):
