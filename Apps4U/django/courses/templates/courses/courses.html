@@ -1,55 +1,7 @@
+{% extends "base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apps4U - Курси</title>
-
-    <link rel="icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <style>
-        body { font-family: 'SN Pro', sans-serif; }
-        .font-logo {font-family: 'Russo One', sans-serif;}
-    </style>
-</head>
-<body class="min-h-screen flex flex-col bg-white">
-
-    <header class="bg-[#6B5B95] text-white h-16 py-2 px-6 md:px-12 flex items-center justify-between fixed top-0 left-0 w-full z-50">
-        <div class="text-3xl tracking-wide font-logo flex-shrink-0">
-            <a href="{% url 'home' %}">Apps4U</a>
-        </div>
-
-        <div class="flex items-center space-x-4">
-            <nav class="hidden md:flex space-x-2">
-                <a href="{% url 'course_list' %}"
-                class="px-4 py-2 text-sm rounded-lg transition-all duration-200
-                {% if request.resolver_match.url_name == 'course_list' %}
-                    bg-white text-[#6B5B95] font-bold
-                {% else %}
-                    text-white hover:text-gray-200
-                {% endif %}">Курси</a>
-                <a href="{% url 'faq_list' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">FAQs</a>
-                <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Петиції</a>
-                <a href="{% url 'starter_pack' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Стартерпак</a>
-            </nav>
-
-            <a href="{% url 'profile' %}" class="group flex items-center">
-                <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white group-hover:border-[#E0E8D0] transition-colors duration-300">
-                    <img src="{{ user.profile.icon.url }}" alt="Profile Picture" class="w-full h-full object-cover">
-                </div>
-            </a>
-        </div>
-    </header>
+{% block content %}
 
     <main class="flex-grow pt-28 pb-12 px-6 md:px-20 max-w-[1000px] mx-auto w-full">
       <h1 class="text-3xl font-bold mb-8 text-gray-900">Курси</h1>
@@ -72,7 +24,7 @@
                   </p>
 
                   <div class="mt-auto">
-                      <a href="{% url 'course_detail' course.slug %}" class="inline-flex items-center justify-center bg-white border border-black text-gray-800 rounded-md px-5 py-2 text-sm font-medium hover:bg-gray-50 transition shadow-sm">
+                      <a href="{% url 'course_detail' course.slug %}" class="flex-shrink-0 bg-white border border-black px-5 py-2 rounded-md text-sm font-bold hover:bg-black hover:text-white transition-all cursor-pointer">
                           Перейти
                       </a>
                   </div>
@@ -84,3 +36,5 @@
   </main>
   <footer class="bg-[#EADDFF] pt-12 pb-32 px-6 md:px-20">
   </footer>
+
+  {% endblock %}
