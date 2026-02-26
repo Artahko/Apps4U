@@ -12,6 +12,7 @@ class Petition(models.Model):
 
     def __str__(self):
         return self.title
+
     @property
     def days_remaining(self):
         expiry = self.created_at + timedelta(days=30)
@@ -31,5 +32,4 @@ class Vote(models.Model):
     value = models.SmallIntegerField(choices=VOTE_CHOICES)
 
     class Meta:
-        # not liking multiple times
         unique_together = ('petition', 'user')

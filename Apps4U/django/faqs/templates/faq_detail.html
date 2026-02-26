@@ -8,9 +8,9 @@
 
         <div class="flex items-center gap-3 mb-2">
             <img class="w-10 h-10 rounded-full border-2 border-white shadow-sm"
-                src="https://ui-avatars.com/api/?name={{ question.user.username }}&background=random" alt="User">
+                src="{{ question.user.profile.icon.url }}" alt="User">
             <div class="flex flex-col leading-tight">
-                <span class="font-bold text-gray-800">{{ question.user.username }}</span>
+                <span class="font-bold text-gray-800">{{ question.user.first_name }} {{ question.user.last_name }}</span>
                 <span class="text-[#6B5B95] text-xs font-bold uppercase">{{ question.course.title }}</span>
             </div>
         </div>
@@ -62,5 +62,6 @@
         lucide.createIcons();
     }
 </script>
+
 
 {% endblock %}
