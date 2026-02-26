@@ -5,6 +5,7 @@ class Course(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     course_id = models.CharField(max_length=10, unique=True)
     description = models.TextField(blank=True)
+    photo = models.ImageField(upload_to='courses_pics/', default='courses_pics/default.jpg')
 
     def __str__(self):
         return f"{self.title}"
