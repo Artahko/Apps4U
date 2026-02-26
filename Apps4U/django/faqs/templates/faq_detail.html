@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-20 px-6 py-12">
+    <div class="mb-8 pt-12">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-6">{{ question.title }}</h1>
+
+        <div class="flex items-center gap-3 mb-2">
+            <img class="w-10 h-10 rounded-full border-2 border-white shadow-sm"
+                src="https://ui-avatars.com/api/?name={{ question.user.username }}&background=random" alt="User">
+            <div class="flex flex-col leading-tight">
+                <span class="font-bold text-gray-800">{{ question.user.username }}</span>
+                <span class="text-[#6B5B95] text-xs font-bold uppercase">{{ question.course.title }}</span>
+            </div>
+        </div>
+
+        <div class="p-5">
+            <p class="text-gray-700 whitespace-pre-line">
+                {{ question.content }}
+            </p>
+        </div>
+    </div>
+
+    </br></br>
+
+    <div class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-800 border-b border-gray-200 pb-3 mb-6 flex items-center gap-2">
+            <i data-lucide="message-square" class="w-6 h-6 text-[#6B5B95]"></i> Коментарі
+        </h2>
+
+        <div class="space-y-4 mb-6">
+            {% for answer in question.answers.all %}
+            <div class="bg-gray-50 border border-gray-100 rounded-xl p-5 hover:bg-white hover:border-gray-200 transition hover:shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <strong class="text-gray-900 font-bold">{{ answer.user }}</strong>
+                            <span class="text-xs text-gray-500 bg-gray-200/50 px-2 py-1 rounded-md">{{ answer.created_at|date:"d.m.Y, H:i" }}</span>
+                        </div>
+                        <p class="text-gray-700 whitespace-pre-line">{{ answer.text }}</p>
+                    </div>
+            {% empty %}
+            <p class="text-gray-500 italic px-2">Поки що немає коментарів. Будь першим!</p>
+            {% endfor %}
+        </div>
+
+        <a href="{% url 'add_answer' question.id%}" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#6B5B95] text-white font-medium rounded-xl hover:bg-[#524575] shadow-sm transition">
+            <i data-lucide="pen-line" class="w-4 h-4"></i> Додати коментар
+        </a>
+    </div>
+
+    <div class="border-t border-gray-200 mt-12 pt-6 ">
+        <a href="{% url 'faq_list' %}" class="flex items-center gap-2 text-gray-500 hover:text-black transition font-medium">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            Повернутися до списку
+        </a>
+    </div>
+
+</div>
+
+<script>
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+</script>
+
+{% endblock %}
