@@ -14,11 +14,11 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
         {% for question in questions %}
-        <div class="bg-[#EBF2D5] p-6 rounded-3xl shadow-sm flex flex-col justify-between h-52">
+        <div class="bg-[#E3EBCF] p-6 rounded-3xl shadow-sm flex flex-col justify-between h-52">
 
             <div>
                 <div class="flex justify-between items-start">
-                    <h5 class="text-xl font-bold text-gray-900 line-clamp-2 leading-tight break-all">
+                    <h5 class="text-xl font-bold text-gray-900 line-clamp-2 leading-tight break-words">
                         {{ question.title }}
                     </h5>
                     <div class="text-[#6B5B95] opacity-30 flex-shrink-0 ml-2">
@@ -45,7 +45,7 @@
                 </div>
                 <a href="{% url 'faq_detail' question.id %}"
 
-                            class="flex-shrink-0 bg-white border border-black px-5 py-2 rounded-xl text-sm font-bold hover:bg-black hover:text-white transition-all cursor-pointer">
+                    class="flex-shrink-0 bg-white border border-black px-5 py-2 rounded-xl text-sm font-bold hover:bg-black hover:text-white transition-all cursor-pointer">
                         Деталі
                 </a>
 
