@@ -107,11 +107,14 @@
     const accordionItems = document.querySelectorAll('.accordion-item');
 
     accordionItems.forEach(item => {
-        const header = item.querySelector('.accordion-header');
         const content = item.querySelector('.accordion-content');
         const icon = item.querySelector('.icon-toggle');
 
-        header.addEventListener('click', () => {
+        item.addEventListener('click', (event) => {
+            if (event.target.closest('.accordion-content')) {
+                return;
+            }
+
             const isOpen = content.classList.contains('grid-rows-[1fr]');
 
             if (isOpen) {
