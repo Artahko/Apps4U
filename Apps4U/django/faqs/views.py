@@ -49,10 +49,7 @@ def ask_question(request):
 
 
 
-def get_answers(request, question_id):
-    answers = Answer.objects.filter(question_id=question_id).order_by('created_at')
-    data = [{"user": a.user.username, "text": a.text, "date": a.created_at.strftime("%H:%M")} for a in answers]
-    return JsonResponse(data, safe=False)
+
 
 @login_required
 def post_answer(request, question_id):
@@ -69,6 +66,7 @@ def post_answer(request, question_id):
             return HttpResponse(status=200)
     return HttpResponse(status=400)
 
+@login_required
 def add_answer(request, question_id):
     question_obj = get_object_or_404(Question, id=question_id)
 

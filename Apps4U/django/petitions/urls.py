@@ -3,7 +3,8 @@ from . import views
 
 urlpatterns = [
     path('', views.faq_list, name='faq_list'),
-    path('ask/', views.ask_question, name='ask_question'),
+
     path('<int:question_id>/', views.faq_detail, name='faq_detail'),
     path('<int:question_id>/comment', views.add_answer, name='add_answer'),
+
 ]
