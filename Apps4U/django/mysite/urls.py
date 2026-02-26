@@ -10,6 +10,7 @@ urlpatterns = [
     path('profile/', include('users.urls')),
     path('accounts/', include("allauth.urls")),
     path('faqs/', include('faqs.urls')),
+    path('petitions/', include('petitions.urls')),
 ]
 
 if settings.DEBUG:
