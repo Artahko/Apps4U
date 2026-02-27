@@ -180,3 +180,8 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 
 SOCIALACCOUNT_ADAPTER = 'users.adapters.CustomSocialAccountAdapter'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'fedorenko.pn@ucu.edu.ua'
+EMAIL_HOST_PASSWORD = 'nppk sskj cdbw prog'
