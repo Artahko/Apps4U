@@ -23,7 +23,9 @@
                     min-h-[420px]">
             <div class="flex items-center mb-6">
                 <div class="w-12 h-12 bg-gray-300 rounded-full overflow-hidden border-2 border-white">
-                    <img src="{{ petition.user.profile.icon.url }}" alt="Profile Picture" class="w-full h-full object-cover">
+                    <a href="{% url 'others_profile' petition.user.profile.pk %}">
+                        <img src="{{ petition.user.profile.icon.url }}" alt="Profile Picture" class="w-full h-full object-cover">
+                    </a>
                 </div>
                 <span class="font-bold text-lg ml-4 text-gray-800">{{ petition.user.username}} </span>
             </div>
