@@ -1,125 +1,79 @@
+{% extends "base.html" %}
 {% load static %}
+{% block title %}Apps4U - {{ course.title }} Активності{% endblock %}
 
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apps4U - Add Comment</title>
+{% block content %}
 
-    <link rel="icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
+<div class="flex-grow pt-16 flex flex-col md:flex-row">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <style>
-        body { font-family: 'SN Pro', sans-serif; }
-        .font-logo {font-family: 'Russo One', sans-serif;}
-    </style>
-</head>
-<body class="min-h-screen flex flex-col bg-white">
-
-    <header class="bg-[#6B5B95] text-white h-16 py-2 px-6 md:px-12 flex items-center justify-between fixed top-0 left-0 w-full z-50">
-        <div class="text-3xl tracking-wide font-logo flex-shrink-0">
-            <a href="{% url 'home' %}">Apps4U</a>
+    <aside class="w-full md:w-[320px] bg-[#E4EACD] flex-shrink-0 p-8 flex flex-col gap-6">
+        <div class="flex items-center gap-3 font-semibold text-gray-900 mt-4 md:mt-8">
+            <i data-lucide="info" class="w-5 h-5"></i>
+            <span class="text-xl">Контент</span>
         </div>
 
-        <div class="flex items-center space-x-4">
-            <nav class="hidden md:flex space-x-2">
-                <a href="{% url 'course_list' %}"
-                class="px-4 py-2 text-sm rounded-lg transition-all duration-200 bg-white text-[#6B5B95] font-bold">
-                Курси
-                </a>
-
-                <a href="{% url 'faq_list' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">FAQs</a>
-                <a href="#" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Петиції</a>
-                <a href="{% url 'starter_pack' %}" class="px-3 py-1.5 text-sm hover:text-gray-200 transition">Стартерпак</a>
-            </nav>
-
-            <a href="{% url 'profile' %}" class="group flex items-center">
-                <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white group-hover:border-[#E0E8D0] transition-colors duration-300">
-                    <img src="{{ user.profile.icon.url }}" alt="Profile Picture" class="w-full h-full object-cover">
-                </div>
+        <nav class="flex flex-col gap-2 mt-4">
+            <a href="{% url 'course_detail' course.slug %}" class="text-[#4A4A4A] hover:bg-white/60 px-4 py-3 rounded-xl text-[16px] transition">
+                Про Курс
             </a>
+
+            <a href="{% url 'course_activities' course.slug %}" class="bg-white text-black px-4 py-3 rounded-xl text-[16px]">
+                Активності
+            </a>
+            <a href="{% url 'course_faq' course.slug %}" class="text-[#4A4A4A] hover:bg-white/60 px-4 py-3 rounded-xl text-[16px] transition">
+                Поширені запитання
+            </a>
+
+            <div class="mt-8 border-t border-black pt-6">
+                <a href="{% url 'course_list' %}" class="text-[#4A4A4A] hover:text-black text-[16px] flex items-center gap-2 transition">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Назад до курсів
+                </a>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="flex-grow p-6 md:p-10 flex flex-col items-center justify-start bg-gray-50 w-full">
+        <div class="w-full max-w-3xl bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mt-4 md:mt-8">
+
+            <div class="bg-gray-50/50 border-b border-gray-100 p-6 md:p-8">
+                <h1 class="text-lg md:text-xl font-semibold text-gray-800 flex items-center gap-3">
+                    <i data-lucide="message-circle" class="w-6 h-6 text-[#6B5B95]"></i>
+                    Додати коментар до:
+                </h1>
+                <div class="mt-3 p-4 bg-white rounded-xl border border-gray-100 text-gray-600 italic">
+                    "{{ activity.activity_text }}"
+                </div>
+            </div>
+
+            <div class="p-6 md:p-8">
+                <form method="POST" class="flex flex-col gap-4">
+                    {% csrf_token %}
+
+                    <div class="w-full [&>textarea]:w-full [&>textarea]:p-4 [&>textarea]:border [&>textarea]:border-gray-200 [&>textarea]:rounded-xl [&>textarea]:focus:ring-2 [&>textarea]:focus:ring-[#6B5B95]/30 [&>textarea]:focus:border-[#6B5B95] [&>textarea]:transition-all [&>textarea]:resize-y [&>textarea]:min-h-[120px] [&>textarea]:text-gray-700 [&>textarea]:outline-none">
+                        {{ form.body }}
+                    </div>
+
+                <div class="flex items-center justify-end mt-4">
+                    <div class="flex items-center gap-4">
+                        <a href="{% url 'activity_detail' course_slug=course.slug activity_id=activity.id %}"
+                        class="text-sm font-medium text-gray-500 hover:text-red-500 transition-colors px-2 py-2">
+                            Скасувати
+                        </a>
+                        <button type="submit"
+                                class="flex items-center gap-2 bg-[#6B5B95] hover:bg-[#5a4c7e] text-white px-6 py-2.5 rounded-xl font-semibold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95">
+                            Надіслати
+                            <i data-lucide="send" class="w-4 h-4 ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                </form>
+            </div>
         </div>
-    </header>
+    </main>
+</div>
 
-    <div class="flex-grow pt-16 flex flex-col md:flex-row">
+<script>
+    lucide.createIcons();
+</script>
 
-        <aside class="w-full md:w-[320px] bg-[#E4EACD] flex-shrink-0 p-8 flex flex-col gap-6">
-            <div class="flex items-center gap-3 font-semibold text-gray-900 mt-4 md:mt-8">
-                <i data-lucide="info" class="w-5 h-5"></i>
-                <span class="text-xl">Контент</span>
-            </div>
-
-            <nav class="flex flex-col gap-2 mt-4">
-                <a href="{% url 'course_detail' course.slug %}" class="text-[#4A4A4A] hover:bg-white/60 px-4 py-3 rounded-xl text-[16px] transition">
-                    Про Курс
-                </a>
-
-                <a href="{% url 'course_activities' course.slug %}" class="bg-white text-black px-4 py-3 rounded-xl text-[16px]">
-                    Активності
-                </a>
-                <a href="{% url 'course_faq' course.slug %}" class="text-[#4A4A4A] hover:bg-white/60 px-4 py-3 rounded-xl text-[16px] transition">
-                    Поширені запитання
-                </a>
-
-                <div class="mt-8 border-t border-black pt-6">
-                    <a href="{% url 'course_list' %}" class="text-[#4A4A4A] hover:text-black text-[16px] flex items-center gap-2 transition">
-                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Назад до курсів
-                    </a>
-                </div>
-            </nav>
-        </aside>
-
-        <main class="flex-grow p-6 md:p-10 flex flex-col items-center justify-start bg-gray-50 w-full">
-            <div class="w-full max-w-3xl bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mt-4 md:mt-8">
-
-                <div class="bg-gray-50/50 border-b border-gray-100 p-6 md:p-8">
-                    <h1 class="text-lg md:text-xl font-semibold text-gray-800 flex items-center gap-3">
-                        <i data-lucide="message-circle" class="w-6 h-6 text-[#6B5B95]"></i>
-                        Додати коментар до:
-                    </h1>
-                    <div class="mt-3 p-4 bg-white rounded-xl border border-gray-100 text-gray-600 italic">
-                        "{{ activity.activity_text }}"
-                    </div>
-                </div>
-
-                <div class="p-6 md:p-8">
-                    <form method="POST" class="flex flex-col gap-4">
-                        {% csrf_token %}
-
-                        <div class="w-full [&>textarea]:w-full [&>textarea]:p-4 [&>textarea]:border [&>textarea]:border-gray-200 [&>textarea]:rounded-xl [&>textarea]:focus:ring-2 [&>textarea]:focus:ring-[#6B5B95]/30 [&>textarea]:focus:border-[#6B5B95] [&>textarea]:transition-all [&>textarea]:resize-y [&>textarea]:min-h-[120px] [&>textarea]:text-gray-700 [&>textarea]:outline-none">
-                            {{ form.body }}
-                        </div>
-
-                    <div class="flex items-center justify-end mt-4">
-                        <div class="flex items-center gap-4">
-                            <a href="{% url 'activity_detail' course_slug=course.slug activity_id=activity.id %}"
-                            class="text-sm font-medium text-gray-500 hover:text-red-500 transition-colors px-2 py-2">
-                                Скасувати
-                            </a>
-                            <button type="submit"
-                                    class="flex items-center gap-2 bg-[#6B5B95] hover:bg-[#5a4c7e] text-white px-6 py-2.5 rounded-xl font-semibold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95">
-                                Надіслати
-                                <i data-lucide="send" class="w-4 h-4 ml-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <script>
-        lucide.createIcons();
-    </script>
-
-<footer class="bg-[#EADDFF] pt-12 pb-32 px-6 md:px-20">
-</footer>
+{% endblock %}
