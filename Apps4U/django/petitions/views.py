@@ -3,6 +3,8 @@ from .models import Petition, Vote
 from django.db.models import Exists, OuterRef, Count, Sum
 from django.utils import timezone
 from datetime import timedelta
+from django.core.mail import send_mail
+from django.conf import settings
 # from .forms import QuestionForm, AnswerForm
 
 from django.contrib.auth.decorators import login_required
@@ -63,5 +65,19 @@ def vote_petition(request, petition_id):
 
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         return JsonResponse({'action': action, 'count': count})
+    likes = petition.votes.count()
+    if likes == 50:
+        subject = f'🎉 Твоя петиція "{petition.title}" набирає оберти!'
+        message = f'Привіт! Твоя петиція зібрала вже {likes} підписів на Apps4U.'
+        print("sent")
+        send_mail(
+            subject,
+            message,
+            settings.EMAIL_HOST_USER,
+            [petition.user.email],
+            fail_silently=True,
+        )
+
+
 
     return redirect('petition_list')
