@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileUpdateForm
+from django.views.generic import DetailView
+from .models import Profile
 
 def login(request):
     return render(request, "users/login.html")
@@ -41,3 +43,8 @@ def edit_profile(request):
         'p_form': p_form
     }
     return render(request, 'users/edit_profile.html', context)
+
+class ProfileDetailView(DetailView):
+    model = Profile
+    template_name = 'users/others_profile.html'
+    context_object_name = 'viewed_profile'

@@ -36,6 +36,7 @@ def activity_detail(request, course_slug, activity_id):
         'activity': activity,
     })
 
+@login_required
 def add_material(request, course_slug, activity_id):
     activity = get_object_or_404(Activity, id=activity_id, course__slug=course_slug)
 
@@ -43,16 +44,16 @@ def add_material(request, course_slug, activity_id):
         form = MaterialForm(request.POST, request.FILES)
         if form.is_valid():
             material = form.save(commit=False)
-            material.activity = activity # Link it to the activity
+            material.activity = activity
             material.save()
-            # Send them back to the detail page after saving
+
             return redirect('activity_detail', course_slug=course_slug, activity_id=activity_id)
     else:
         form = MaterialForm()
 
     return render(request, 'activities/add_material.html', {'form': form, 'activity': activity})
 
-
+@login_required
 def add_comment(request, course_slug, activity_id):
     course = get_object_or_404(Course, slug=course_slug)
     activity = get_object_or_404(Activity, id=activity_id)
