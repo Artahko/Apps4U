@@ -29,7 +29,7 @@
             <div class="flex items-center justify-between gap-4 mt-auto">
 
                 <div class="flex items-center gap-3 min-w-0">
-                    <a href="{% url 'others_profile' question.user.profile.pk %}">
+                    <a href="{% url 'others_profile' question.user.profile.pk %}" class="flex-none">
                         <img class="w-10 h-10 rounded-full border-2 border-white object-cover flex-shrink-0"
                             src="{{ question.user.profile.icon.url }}"
                             alt="User">
