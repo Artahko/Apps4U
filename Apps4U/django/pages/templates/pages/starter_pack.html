@@ -1,7 +1,6 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}Apps4U - Стартер Пак{% endblock %}
-
 {% block content %}
 
 <main class="flex-grow bg-white px-6 md:px-20 pt-24 pb-12 max-w-4xl mx-auto w-full">
@@ -75,7 +74,29 @@
             <div class="accordion-content grid grid-rows-[0fr] opacity-0 transition-all duration-300 cursor-text">
                 <div class="overflow-hidden">
                     <div class="pt-3 text-gray-800 leading-relaxed text-base">
-                        lorem ipsum?
+                        <p class="mb-4">Ось короткий список найкращих інструментів для навчання:</p>
+                        <h4 class="font-bold text-black mt-4 mb-2 flex items-center gap-2">Практика коду</h4>
+                        <ul class="list-disc pl-5 mb-5 space-y-1">
+                            <li><strong>LeetCode / Codewars</strong> — алгоритмічні задачі та логіка.</li>
+                            <li><strong>freeCodeCamp</strong> — практичні проєкти із сертифікатами.</li>
+                        </ul>
+
+                        <h4 class="font-bold text-black mt-4 mb-2 flex items-center gap-2">Створення нотаток</h4>
+                        <ul class="list-disc pl-5 mb-5 space-y-1">
+                            <li><strong>Notion</strong> — універсальний комбайн (бази даних, дошки).</li>
+                            <li><strong>Obsidian</strong> — зв'язки між нотатками та локальне зберігання.</li>
+                        </ul>
+
+                        <h4 class="font-bold text-black mt-4 mb-2 flex items-center gap-2">Математичний аналіз</h4>
+                        <ul class="list-disc pl-5 mb-5 space-y-1">
+                            <li><strong>WolframAlpha</strong> — покрокові розв'язання інтегралів та похідних.</li>
+                            <li><strong>Symbolab</strong> — зручний візуальний інтерфейс для перевірки кроків.</li>
+                            <li><strong>GeoGebra</strong> — побудова 2D/3D графіків та візуалізація.</li>
+                        </ul>
+
+                        <p class="mt-5 text-sm border-l-2 border-gray-600 pl-3">
+                            <strong>Порада:</strong> Для візуального розуміння концепцій матану дуже рекомендую YouTube-канал <strong>3Blue1Brown</strong>.
+                        </p>
                     </div>
                 </div>
             </div>
