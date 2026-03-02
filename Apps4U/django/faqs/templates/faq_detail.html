@@ -36,7 +36,7 @@
             {% for answer in question.answers.all %}
             <div class="bg-gray-50 border border-gray-100 rounded-xl p-5 hover:bg-white hover:border-gray-200 transition hover:shadow-sm">
                         <div class="flex justify-between items-start mb-2">
-                            <strong class="text-gray-900 font-bold">{{ answer.user }}</strong>
+                            <strong class="text-gray-900 font-bold">{{ answer.user.first_name }} {{ answer.user.last_name }}<strong>
                             <span class="text-xs text-gray-500 bg-gray-200/50 px-2 py-1 rounded-md">{{ answer.created_at|date:"d.m.Y, H:i" }}</span>
                         </div>
                         <p class="text-gray-700 whitespace-pre-line">{{ answer.text }}</p>
