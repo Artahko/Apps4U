@@ -35,24 +35,20 @@
     <main class="flex-1 bg-white p-8 md:p-16 lg:p-24">
         <div class="max-w-3xl">
             <h1 class="text-3xl md:text-4xl font-bold text-[#000000] mb-8">
-                Activities for {{ course.title }}
+                Активності {{ course.title }}
             </h1>
-            <ul class="space-y-2 border border-gray-100 rounded-3xl p-3 bg-gray-50/30">
+            <ul class="space-y-2 border border-black rounded-3xl p-3 bg-gray-50/30">
                 {% for activity in course.activity_set.all %}
                     <li>
                         <a href="{% url 'activity_detail' course.slug activity.id %}"
                         class="flex items-center gap-4 w-full p-4 rounded-2xl hover:bg-[#E4EACD] text-[#4A4A4A] hover:text-black transition-all duration-200 group">
 
                             <span class="text-lg font-medium">{{ activity.activity_text }}</span>
-
-                            <div class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
-                                <span class="text-sm font-bold text-[#6B5B95]">Перейти</span>
-                            </div>
                         </a>
                     </li>
                 {% empty %}
                     <li class="p-6 text-center text-gray-500">
-                        No activities yet.
+                        Поки що активностей нема.
                     </li>
                 {% endfor %}
             </ul>
