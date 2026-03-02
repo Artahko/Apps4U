@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Apps4U - {{ viewed_profile.user.username }}{% endblock %}
+{% block title %}Apps4U - {{ viewed_profile.user.first_name }} {{ viewed_profile.user.last_name }}{% endblock %}
 {% block content %}
 
 <main class="flex-grow flex items-center justify-center p-6 pt-24">
