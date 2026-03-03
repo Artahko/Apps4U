@@ -19,7 +19,7 @@ class MaterialForm(forms.ModelForm):
         model = Material
         fields = ['name', "upload"]
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g. Glue stick'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Наприклад: Запитайся асистентів'}),
         }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
