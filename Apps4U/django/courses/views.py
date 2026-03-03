@@ -66,7 +66,7 @@ def add_comment(request, course_slug, activity_id):
             comment.post = activity
 
             if request.user.is_authenticated:
-                comment.name = request.user.username
+                comment.name = f"{request.user.first_name} {request.user.last_name}"
             else:
                 comment.name = "Anonymous"
 
