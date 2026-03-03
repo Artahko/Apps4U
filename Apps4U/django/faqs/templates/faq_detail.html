@@ -7,9 +7,10 @@
         <h1 class="text-4xl font-extrabold text-gray-900 mb-6">{{ question.title }}</h1>
 
         <div class="flex items-center gap-3 mb-2">
-            <a href="{% url 'others_profile' question.user.profile.pk %}">
-                <img class="w-10 h-10 rounded-full border-2 border-white shadow-sm"
-                    src="{{ question.user.profile.icon.url }}" alt="User">
+            <a href="{% url 'others_profile' question.user.profile.pk %}" class="flex-none">
+                <img class="w-10 h-10 rounded-full border-2 border-white object-cover flex-shrink-0"
+                    src="{{ question.user.profile.icon.url }}"
+                    alt="User">
             </a>
 
             <div class="flex flex-col leading-tight">
